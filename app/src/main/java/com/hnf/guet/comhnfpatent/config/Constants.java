@@ -12,7 +12,7 @@ import com.hnf.guet.comhnfpatent.util.LogUtils;
 
 public class Constants {
 
-    //hnf very good
+    //fuck you
 
     //服务器请求地址
     public static final String HOST = "https://111.59.124.165/com-patent-api/api/";
