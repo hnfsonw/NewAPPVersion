@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'   //表明这是一个应用程序，可以单独运行
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.hnf.guet.comhnfpatent"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation 'com.android.support.test:runner:0.5'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    implementation 'com.android.support:appcompat-v7:26.+'
+    testImplementation 'junit:junit:4.12'
+    //布局约束
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    //依赖注入，用于view绑定和click事件的处理
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    //根据注解自动生成代码
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //Java线程切换以及异步操作框架
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    //http网络请求框架
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //okhttp日志拦截工具
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    //简化各个组件之间的通信
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    //    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    //新增控件，可以直接设置圆角阴影等
+    implementation 'com.android.support:cardview-v7:26.+'
+    implementation 'com.android.support:design:26.+'
+    //友盟
+    implementation 'com.umeng.analytics:analytics:latest.integration'
+    implementation 'com.venmo.view.tooltip:tooltip:0.1.2@aar'
+    implementation files('libs/jcore-android-1.1.9.jar')
+    implementation files('libs/jpush-android-3.1.1.jar')
+    implementation project(':easeui')
+}

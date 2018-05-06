@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="kprogresshud_default_color">#b1000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="the_main_color">#28282b</color>
+    <color name="application_of_color">#487aed</color>
+    <color name="text_main_color">#bdbdbd</color>
+    <color name="text_hind_color">#767980</color>
+    <color name="small_ele">#e2e5eb</color>
+    <color name="gray_ddd">#DDD</color>
+    <color name="white">#fff</color>
+    <color name="btn_blue_normal">#1e90ff</color>
+    <color name="btn_blue_pressed">#0066FF</color>
+    <color name="login">#FFE4E4E4</color>
+    <color name="login_text">#FF6072AF</color>
+    <color name="text_blue">#7cd0fc</color>
+</resources>
