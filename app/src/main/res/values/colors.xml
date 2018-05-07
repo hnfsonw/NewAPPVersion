@@ -17,4 +17,7 @@
     <color name="login">#FFE4E4E4</color>
     <color name="login_text">#FF6072AF</color>
     <color name="text_blue">#7cd0fc</color>
+    <color name="text_pink">#fb1456</color>
+    <color name="et_white">#d8d8d8</color>
+    <color name="text_grey">#8f8f8f</color>
 </resources>

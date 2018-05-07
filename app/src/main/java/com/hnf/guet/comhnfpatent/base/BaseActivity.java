@@ -456,7 +456,7 @@ public abstract class BaseActivity extends AppCompatActivity implements NetEvent
      * 取消loading
      */
     public void dismissLoading() {
-        LogUtils.e(TAG,"取消loading");
+        LogUtils.i(TAG,"取消loading");
         if (mProfress != null && mProfress.isShowing()) {
             mProfress.dismiss();
         }

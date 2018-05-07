@@ -8,7 +8,10 @@ import android.widget.Toast;
 
 import com.hnf.guet.comhnfpatent.BuildConfig;
 import com.hnf.guet.comhnfpatent.R;
+import com.hnf.guet.comhnfpatent.factory.HttpsFactroy;
+import com.hnf.guet.comhnfpatent.factory.SSLHelper;
 import com.hnf.guet.comhnfpatent.http.HttpService;
+import com.hnf.guet.comhnfpatent.myWedget.chatrow.Constant;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hnf.guet.comhnfpatent.config.Constants;
@@ -16,7 +19,18 @@ import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.ui.activity.acountActivity.LoginActivity;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyStore;
+import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManagerFactory;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -39,13 +53,23 @@ public abstract class BasePresenter {
     private HttpLoggingInterceptor mInterceptor;
     private Context mContext;
 
+
     public BasePresenter(Context context) {
         mGlobalvariable = context.getSharedPreferences("globalvariable", 0);
         mContext = context;
         OkHttpClient builder = getBuilder();
 
-        mRetrofit = new Retrofit.Builder().baseUrl(Constants.HOST).addConverterFactory
-                (GsonConverterFactory.create()).client(builder).build();
+//        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                .sslSocketFactory(SSLHelper.getSSLCertifcation(mContext))
+//                .hostnameVerifier(new UnSafeHostnameVerifier())
+//                .build();
+
+        mRetrofit = new Retrofit.Builder().
+                baseUrl(Constants.HOST).
+                addConverterFactory(GsonConverterFactory.create()).
+//                client(okHttpClient).
+                client(builder).
+                build();
         mHttpService = mRetrofit.create(HttpService.class);
         //把所有接口都封装到service里面
     }
@@ -58,32 +82,34 @@ public abstract class BasePresenter {
     private OkHttpClient getBuilder() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         // log用拦截器
-
         mInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Log.e(TAG, message);
+                Log.d(TAG, "http日志:"+message);
             }
         });
         // 开发模式记录整个body，否则只记录基本信息如返回200，http协议版本等
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             mInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        } else {
-            mInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-        }
+//        } else {
+//            mInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+//        }
         builder.addInterceptor(mInterceptor)
                 .connectTimeout(60, TimeUnit.SECONDS)//设置超时
                 .readTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(true);//错误重连
+                .sslSocketFactory(SSLHelper.getSSLCertifcation(mContext))
+                .hostnameVerifier(new UnSafeHostnameVerifier())
+                .retryOnConnectionFailure(false);//错误重连
         return builder.build();
     }
 
 
-    protected Callback mCallback = new Callback<ResponeModelInfo>() {
 
+    protected Callback mCallback = new Callback<ResponeModelInfo>() {
         @Override
         public void onResponse(Call<ResponeModelInfo> call, Response<ResponeModelInfo> response) {
+            LogUtils.i(TAG,"运行到这里了");
             ResponeModelInfo body = response.body();
             if (body == null){
                 return;
@@ -112,6 +138,7 @@ public abstract class BasePresenter {
         public void onFailure(Call<ResponeModelInfo> call, Throwable t) {
             onDissms(t.getMessage());
             //没连上服务器
+            LogUtils.i(TAG,"网络请求失败："+t.getMessage());
             Toast.makeText(MyApplication.sInstance, MyApplication.sInstance.getString(R.string.Network_Error), Toast.LENGTH_SHORT).show();
 
         }
@@ -321,5 +348,10 @@ public abstract class BasePresenter {
     }
 
 
-
+    private class UnSafeHostnameVerifier implements HostnameVerifier {
+        @Override
+        public boolean verify(String hostname, SSLSession session) {
+            return true;//自行添加判断逻辑，true->Safe，false->unsafe
+        }
+    }
 }

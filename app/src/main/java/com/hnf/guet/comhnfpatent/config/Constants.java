@@ -12,10 +12,8 @@ import com.hnf.guet.comhnfpatent.util.LogUtils;
 
 public class Constants {
 
-    //fuck you
-
     //服务器请求地址
-    public static final String HOST = "https://111.59.124.165/com-patent-api/api/";
+    public static final String HOST = "https://10.21.144.218:8443/guet.patent/api/";
 
     //注册
     public static final String REGISTER = "acountRegister";

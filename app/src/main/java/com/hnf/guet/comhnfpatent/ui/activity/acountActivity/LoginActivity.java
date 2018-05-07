@@ -187,4 +187,8 @@ public class LoginActivity extends BaseActivity {
 
         isLogin = true;
     }
+
+    public void whyNotConnectd(String s) {
+        LogUtils.e(TAG,"为什么没有连接上服务器："+s);
+    }
 }

@@ -82,6 +82,7 @@ public class HnfProgress {
                 mProgressDialog.show();
             }
         } catch (Exception e) {
+            LogUtils.e(TAG,"diualog为什么异常"+e.getMessage());
             LogUtils.e(TAG, "dialog异常");
         }
     }

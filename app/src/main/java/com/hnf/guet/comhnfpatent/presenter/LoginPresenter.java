@@ -34,6 +34,12 @@ public class LoginPresenter extends BasePresenter {
     private String mPassword;
 
 
+    @Override
+    protected void onDissms(String s) {
+
+        mLoginActivity.whyNotConnectd(s);
+    }
+
     public LoginPresenter(Context context, LoginActivity loginActivity) {
         super(context);
         mContext = context;
@@ -45,6 +51,7 @@ public class LoginPresenter extends BasePresenter {
     public void login(String phone,String password){
         if (TextUtils.isEmpty(phone)){
             mLoginActivity.phoneIsEmpty();
+            return;
         }
 
         if (!UserUtil.checkPhone(phone)){
@@ -56,6 +63,7 @@ public class LoginPresenter extends BasePresenter {
             startToLogin(phone,password);
         }else {
             mLoginActivity.passwordIsEmpty();
+            return;
         }
     }
 
@@ -113,7 +121,7 @@ public class LoginPresenter extends BasePresenter {
                 @Override
                 public void run() {
                     mLoginActivity.dismissLoading();
-                    LogUtils.e("loginPresenter","error code:"+i+",meaasge:"+s);
+                    LogUtils.e("loginPresenter","错误码error code:"+i+",meaasge:"+s);
                     /**
                      * 关于错误码可以参考官方api详细说明
                      * http://www.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html
@@ -198,6 +206,7 @@ public class LoginPresenter extends BasePresenter {
             }
         });
     }
+
 
 
     @Override
