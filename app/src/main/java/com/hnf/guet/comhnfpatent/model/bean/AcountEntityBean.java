@@ -1,6 +1,8 @@
 package com.hnf.guet.comhnfpatent.model.bean;
 
-public class AcountEntityBean {
+import java.io.Serializable;
+
+public class AcountEntityBean implements Serializable{
     private int acountId;
     private String acountName;
     private String createTime;

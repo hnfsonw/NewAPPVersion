@@ -64,7 +64,7 @@ public class RegistetrPresenter extends BasePresenter{
             return;
         }
 
-        if (!UserUtil.judgePhoneNums(userName)){
+        if (!UserUtil.checkPhone(userName)){
             mRegisterActivity.phoneError();
             return;
         }

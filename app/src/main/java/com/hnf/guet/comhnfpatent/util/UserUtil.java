@@ -22,7 +22,6 @@ public class UserUtil {
         m = p.matcher(phone);
         b = m.matches();
         return b;
-
     }
 
 

@@ -121,7 +121,7 @@ public class LoginPresenter extends BasePresenter {
                 @Override
                 public void run() {
                     mLoginActivity.dismissLoading();
-                    LogUtils.e("loginPresenter","错误码error code:"+i+",meaasge:"+s);
+                    LogUtils.e("loginPresenter","环信错误码error code:"+i+",meaasge:"+s);
                     /**
                      * 关于错误码可以参考官方api详细说明
                      * http://www.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html
@@ -211,7 +211,18 @@ public class LoginPresenter extends BasePresenter {
 
     @Override
     protected void parserJson(ResponeModelInfo data) {
+        LogUtils.i(TAG,"登录成功："+"token:"+data.getResult().getToken()
+                        +
+                        ",id:"+data.getResult().getAcountId()
+                        +
+                        ",acount: "+data.getResult().getAcountName()
 
+                        +",nick: "+data.getResult().getNickName()
+
+                +",imgurl:"+data.getResult().getImgUrl()
+
+                + ",phone: "+data.getResult().getPhone()
+        );
     }
 
     @Override

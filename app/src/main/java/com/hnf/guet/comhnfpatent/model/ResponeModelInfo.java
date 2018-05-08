@@ -1,5 +1,6 @@
 package com.hnf.guet.comhnfpatent.model;
 
+import com.hnf.guet.comhnfpatent.model.bean.AcountEntityBean;
 import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ public class ResponeModelInfo implements Serializable {
     private int errorCode;
     private long time;
     public ResultBean result;
+
 
     public String getResultMsg() {
         return resultMsg;
@@ -54,5 +56,7 @@ public class ResponeModelInfo implements Serializable {
     public void setResult(ResultBean result) {
         this.result = result;
     }
+
+
 
 }

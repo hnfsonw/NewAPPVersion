@@ -21,6 +21,64 @@ public class ResultBean implements Serializable {
     private String version;
     private String url;
     private String updateTime;
+
+    private String createTime;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getLastLongTime() {
+        return lastLongTime;
+    }
+
+    public void setLastLongTime(String lastLongTime) {
+        this.lastLongTime = lastLongTime;
+    }
+
+    private String password;
+    private String nickName;
+    private String phone;
+    private String imgUrl;
+    private String lastLongTime;
+
+
     private String desc;
 
     public String getDesc() {

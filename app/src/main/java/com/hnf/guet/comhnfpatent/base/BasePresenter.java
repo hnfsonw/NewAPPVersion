@@ -109,7 +109,6 @@ public abstract class BasePresenter {
     protected Callback mCallback = new Callback<ResponeModelInfo>() {
         @Override
         public void onResponse(Call<ResponeModelInfo> call, Response<ResponeModelInfo> response) {
-            LogUtils.i(TAG,"运行到这里了");
             ResponeModelInfo body = response.body();
             if (body == null){
                 return;
@@ -120,7 +119,6 @@ public abstract class BasePresenter {
             //成功取到数据
             if (Constants.State80000 == state ) {
                 parserJson(body);
-
             }else if (Constants.State80001 == state){
                 //验证Token是否失效
                 boolean chekToken = chekToken(body);
