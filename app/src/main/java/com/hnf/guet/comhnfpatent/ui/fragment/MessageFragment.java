@@ -17,4 +17,9 @@ public class MessageFragment extends BaseFragment {
     protected void init() {
 
     }
+
+    @Override
+    protected void dismissNewok() {
+
+    }
 }

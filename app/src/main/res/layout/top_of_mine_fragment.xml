@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@mipmap/blue_blur_bubbles"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/head_img"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:clickable="true"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/white"
+            android:src="@mipmap/timg"
+            >
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            android:id="@+id/nick_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户昵称"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="150dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#9940649b"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom">
+
+            <LinearLayout
+                android:id="@+id/my_push_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="5dp"
+                    android:src="@mipmap/repo_push"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:padding="2dp"
+                    android:text="我的发布"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/white"
+                android:layout_gravity="center">
+
+            </ImageView>
+
+            <LinearLayout
+                android:id="@+id/my_star_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="5dp"
+                    android:src="@mipmap/star"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:padding="2dp"
+                    android:text="我的收藏"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+    <ScrollView
+        android:background="#ededeb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:background="#f1f1ec"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- *************************************************************************   -->
+            <LinearLayout
+                android:clickable="true"
+                android:background="@drawable/layout_select_bg"
+                android:id="@+id/my_message_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:padding="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/message_select"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的消息"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black"
+                    />
+
+                <FrameLayout
+                    android:id="@+id/a"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:padding="20dp"
+                        android:src="@mipmap/regiht_"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="16dp"
+                        />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e2e2de"/>
+
+            <!-- *************************************************************************   -->
+
+            <LinearLayout
+                android:clickable="true"
+                android:background="@drawable/layout_select_bg"
+                android:id="@+id/reset_pass_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:padding="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/reset_password"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="密码修改"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black"
+                    />
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:padding="20dp"
+                        android:src="@mipmap/regiht_"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="16dp"
+                        />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e2e2de"/>
+
+//-------------------------------------------------------
+
+            <LinearLayout
+                android:clickable="true"
+                android:background="@drawable/layout_select_bg"
+                android:id="@+id/version_upgrade_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:padding="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/upgrade"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="版本更新"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black"
+                    />
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:padding="20dp"
+                        android:src="@mipmap/regiht_"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="16dp"
+                        />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e2e2de"/>
+
+            //_______________________________________
+            <LinearLayout
+                android:clickable="true"
+                android:background="@drawable/layout_select_bg"
+                android:id="@+id/feed_back_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:padding="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/opinion"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="意见反馈"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black"
+                    />
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:padding="20dp"
+                        android:src="@mipmap/regiht_"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="16dp"
+                        />
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+//-----------------------------------------------------------------
+            <LinearLayout
+                android:clickable="true"
+                android:background="@drawable/layout_select_bg"
+                android:id="@+id/about_me_layout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:padding="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/aboutme"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="关于app"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black"
+                    />
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:padding="20dp"
+                        android:src="@mipmap/regiht_"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="16dp"
+                        />
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+            <Button
+                android:clickable="true"
+                android:layout_marginTop="24dp"
+                android:id="@+id/login_out_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_out_bg"
+                android:text="退出登录"
+                android:textColor="@color/btn_answer_normal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                />
+            
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>

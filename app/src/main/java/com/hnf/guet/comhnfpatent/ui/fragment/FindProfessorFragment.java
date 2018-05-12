@@ -17,4 +17,9 @@ public class FindProfessorFragment extends BaseFragment{
     protected void init() {
 
     }
+
+    @Override
+    protected void dismissNewok() {
+
+    }
 }

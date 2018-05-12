@@ -111,6 +111,10 @@ public abstract class BaseActivity extends AppCompatActivity implements NetEvent
     private boolean mIsEMCLogin;
     private IntentFilter mFilter;
 
+    private boolean hideBar;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +136,7 @@ public abstract class BaseActivity extends AppCompatActivity implements NetEvent
         registerReceiver(oBaseActiviy_Broad, mIntentFilter);
 
     }
+
 
 
     /**

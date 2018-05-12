@@ -43,7 +43,6 @@ public class FragmentFactory {
 
             case FIND_PROFESS_FRAGMENT:
                 fragment = new FindProfessorFragment();
-
                 break;
 
             case HAVE_IDEAR_FRAGMENT:

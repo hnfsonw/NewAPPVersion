@@ -7,8 +7,10 @@ import android.util.Log;
 
 import com.hnf.guet.comhnfpatent.R;
 import com.hnf.guet.comhnfpatent.base.BasePresenter;
+import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.ui.activity.acountActivity.LoginActivity;
+import com.hnf.guet.comhnfpatent.ui.fragment.HomeFragment;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
 import com.hnf.guet.comhnfpatent.util.MD5Utils;
 import com.hnf.guet.comhnfpatent.util.UserUtil;
@@ -36,8 +38,9 @@ public class LoginPresenter extends BasePresenter {
 
     @Override
     protected void onDissms(String s) {
-
+        mLoginActivity.dismissLoading();
         mLoginActivity.whyNotConnectd(s);
+        mLoginActivity.printn(mContext.getString(R.string.network_error));
     }
 
     public LoginPresenter(Context context, LoginActivity loginActivity) {
@@ -99,7 +102,7 @@ public class LoginPresenter extends BasePresenter {
     }
 
     /**
-     * 环信登录成功的回调
+     * 环信登录成功/失败的回调
      */
     EMCallBack MyEMCallBack = new EMCallBack() {
         @Override
@@ -111,6 +114,9 @@ public class LoginPresenter extends BasePresenter {
                     EMClient.getInstance().chatManager().loadAllConversations();
                     //登录成功后跳转
                     LogUtils.e("loginPresenter","环信已经登录成功了"+Thread.currentThread().getName());
+                    mGlobalvariable.edit()
+                            .putBoolean("login",true)
+                            .apply();
                 }
             });
         }
@@ -197,7 +203,7 @@ public class LoginPresenter extends BasePresenter {
 
             @Override
             public void onError(int i, String s) {
-                Log.i("LoginPresenter", "logout error " + i + " - " + s);
+                Log.i("LoginPresenter", "环信logout error " + i + " - " + s);
             }
 
             @Override
@@ -212,21 +218,44 @@ public class LoginPresenter extends BasePresenter {
     @Override
     protected void parserJson(ResponeModelInfo data) {
         LogUtils.i(TAG,"登录成功："+"token:"+data.getResult().getToken()
-                        +
-                        ",id:"+data.getResult().getAcountId()
-                        +
-                        ",acount: "+data.getResult().getAcountName()
+                +
+                ",id:"+data.getResult().getAcountId()
+                +
+                ",acount: "+data.getResult().getAcountName()
 
-                        +",nick: "+data.getResult().getNickName()
+                +",nick: "+data.getResult().getNickName()
 
                 +",imgurl:"+data.getResult().getImgUrl()
 
                 + ",phone: "+data.getResult().getPhone()
         );
+
+        mGlobalvariable.edit()
+                .putLong("acountId",data.getResult().getAcountId())
+                .putString("token",data.getResult().getToken())
+                .putString("acountName",data.getResult().getAcountName())
+                .putString("nickName",data.getResult().getNickName())
+                .putString("imgUrl",data.getResult().getImgUrl())
+                .putString("phone",data.getResult().getPhone())
+                .apply();
+
+        //保存token
+        MyApplication.sToken = data.getResult().getToken();
+        MyApplication.sAcountId = data.getResult().getAcountId();
+
+
+mLoginActivity.loginSuccess();
     }
 
+
+    /**
+     * 登录失败
+     * @param s
+     */
     @Override
     protected void onFaiure(ResponeModelInfo s) {
 
+        LogUtils.e(TAG,"登录失败："+s.getResultMsg());
+        mLoginActivity.resultMsg(s.getResultMsg());
     }
 }

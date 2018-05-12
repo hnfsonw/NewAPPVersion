@@ -13,7 +13,7 @@ import com.hnf.guet.comhnfpatent.util.LogUtils;
 public class Constants {
 
     //服务器请求地址
-    public static final String HOST = "https://10.21.145.50:8443/guet.patent/api/";
+    public static final String HOST = "https://10.21.145.179:8443/guet.patent/api/";
 
     //注册
     public static final String REGISTER = "acountRegister";
@@ -41,6 +41,9 @@ public class Constants {
 
     //更新反馈意见
     public static final String UPDATE_FEEL_BACK = "writeOrUpdateOption";
+
+    //找回密码
+    public static final String FIND_PASSWORD_BACK = "findPwdBack";
 
 
     public static final int DEBUGLEVEL = LogUtils.LEVEL_ALL;

@@ -48,6 +48,14 @@ public interface HttpService {
     Call<ResponeModelInfo> resetPassWordInterface(@FieldMap Map<String,String> fields);
 
     /**
+     * 找回密码的接口
+     */
+    @FormUrlEncoded
+    @POST(Constants.FIND_PASSWORD_BACK)
+    Call<ResponeModelInfo> findPassWordBackInterface(@FieldMap Map<String,String> fields);
+
+
+    /**
      * 上传附件
      */
     @FormUrlEncoded
@@ -56,10 +64,11 @@ public interface HttpService {
 
     /**
      * 验证手机号码有没有注册
+     * @param fields
      */
     @FormUrlEncoded
     @POST(Constants.CHECKACOUNT)
-    Call<ResponeModelInfo> checkValidAcountInterface(@FieldMap Map<String,String> fields);
+    Call<ResponeModelInfo> checkValidAcountInterface(@FieldMap HashMap<String, Object> fields);
 
     /**
      * 修改账户信息
@@ -73,15 +82,16 @@ public interface HttpService {
      * @param fields
      */
     @FormUrlEncoded
-    @POST(Constants.CHECKACOUNT)
+    @POST(Constants.CHECK_VERSION)
     Call<ResponeModelInfo> checkVersionInterface(@FieldMap HashMap<String, Object> fields);
 
     /**
      * 更新反馈的意见
+     * @param fields
      */
     @FormUrlEncoded
     @POST(Constants.UPDATE_FEEL_BACK)
-    Call<ResponeModelInfo> updateFeelBackInterface(@FieldMap Map<String,String> fields);
+    Call<ResponeModelInfo> updateFeelBackInterface(@FieldMap HashMap<String, Object> fields);
 
 
 }

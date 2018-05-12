@@ -150,11 +150,11 @@ public abstract class BasePresenter {
             if (body == null){
                 return;
             }
-            Log.e(TAG, "onResponse: " + body.getResultMsg() );
-            Log.e(TAG, "onResponse: " + body.getResultCode());
+            Log.e(TAG, "onResponse2: " + body.getResultMsg() );
+            Log.e(TAG, "onResponse2: " + body.getResultCode());
             int state = body.getResultCode();
-            Log.e(TAG, "onResponse: " + body.getResultMsg() );
-            Log.e(TAG, "onResponse: " + body.getResultCode());
+            Log.e(TAG, "onResponse2: " + body.getResultMsg() );
+            Log.e(TAG, "onResponse2: " + body.getResultCode());
             if (Constants.State80000 == state){
                 onSuccess(body);
             }else if (Constants.State80001 == state){

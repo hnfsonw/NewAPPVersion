@@ -100,7 +100,7 @@ public class RegistetrPresenter extends BasePresenter{
         HashMap<String,String> params = new HashMap<>();
         params.put("mobile",phone);
         LogUtils.i(TAG,"发送短信验证码"+String.valueOf(params));
-        mSendCheckCode = mHttpService.sendCheckCodeInterface(params);
+        mSendCheckCode = mHttpService.resetPassWordInterface(params);
         mRegisterActivity.showLoading(mContext.getString(R.string.dialogMessage));
         mSendCheckCode.enqueue(mCallback);
     }

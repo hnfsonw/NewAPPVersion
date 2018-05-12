@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.hnf.guet.comhnfpatent.base.BaseActivity;
 import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.presenter.LoginPresenter;
+import com.hnf.guet.comhnfpatent.ui.activity.HomeActivity;
 import com.hnf.guet.comhnfpatent.ui.fragment.HomeFragment;
 import com.hnf.guet.comhnfpatent.ui.view.LastInputEditText;
 
@@ -56,6 +57,7 @@ public class LoginActivity extends BaseActivity {
     private boolean isLogin = true;
     private String mPhone;
     private String mPassword;
+    private String mToken;
 
     @Override
     protected int getLayoutRes() {
@@ -72,6 +74,9 @@ public class LoginActivity extends BaseActivity {
         mGlobalvariable = getSharedPreferences("globalvariable", MODE_PRIVATE);
         mMd5Password = mGlobalvariable.getString("password", "");
         mAppAccount = mGlobalvariable.getString("appAccount", "");
+        mToken = mGlobalvariable.getString("token","");
+        LogUtils.e(TAG,"token是否还有效："+mToken);
+
         initView();
     }
 
@@ -190,5 +195,20 @@ public class LoginActivity extends BaseActivity {
 
     public void whyNotConnectd(String s) {
         LogUtils.e(TAG,"为什么没有连接上服务器："+s);
+    }
+
+    public void resultMsg(String resultMsg) {
+        dismissLoading();
+        printn(resultMsg);
+    }
+
+    /**
+     * 通知v层登录成功
+     */
+    public void loginSuccess() {
+        dismissLoading();
+        LogUtils.i(TAG,"登录跳转--》HomeActivity");
+        toActivity(HomeActivity.class);
+        finishActivityByAnimation(this);
     }
 }

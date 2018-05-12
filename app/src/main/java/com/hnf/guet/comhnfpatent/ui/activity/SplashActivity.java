@@ -53,9 +53,8 @@ public class SplashActivity extends BaseActivity {
         mSplashPresenter = new SplashPresenter(this,this);
         mGlobalVariable = getSharedPreferences("globalvariable",MODE_PRIVATE);
         mIsLogin = mGlobalVariable.getBoolean("login",false);
+        LogUtils.e(TAG,"环信是否已经登录过："+mIsLogin);
         mHandler = new Handler();
-        LogUtils.e(TAG,"环信是否登入  "+ EMClient.getInstance().isLoggedInBefore());
-        LogUtils.e(TAG,"是否连接上了环信服务器 "+EMClient.getInstance().isConnected());
         if (EMClient.getInstance().isLoggedInBefore() && EMClient.getInstance().isConnected()){
             //加载所有会话到内存
             EMClient.getInstance().chatManager().loadAllConversations();
@@ -87,7 +86,7 @@ public class SplashActivity extends BaseActivity {
         }
         if (mIsLogin){
             exitHomeActivity();
-            toActivity(HomeFragment.class);
+            toActivity(HomeActivity.class);
             finishActivityByAnimation(this);
         }else{
             exitHomeActivity();

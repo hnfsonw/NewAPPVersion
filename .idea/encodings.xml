@@ -3,26 +3,41 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/libs/jcore-android-1.1.9.jar" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/libs/jpush-android-3.1.1.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/home_shape_white_selector.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/kprogresshud_spinner.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/login_shape_white.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/login_shape_white_selector.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/tab_num_view.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/include_login.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/include_title.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/view_bottom_tab.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/view_item_setting.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/no_view_register.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/phone_login.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/phone_password.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/regiht_.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/separator_login.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/underline_login.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/app_setting_btn.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/back.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/half_title.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/home_background.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/home_message.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/home_my.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/home_user.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_btn_send.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/kprogresshud_spinner.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/no_view_register.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/password_register.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/phone_register.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/register.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/search.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/send_code.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/separator_register.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/show_login.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/splash.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/tabbar_home.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/underline_register.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/verification_codes.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/easeui" charset="GBK" />

@@ -3,7 +3,6 @@ package com.hnf.guet.comhnfpatent.base;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
-import android.app.Application;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
@@ -14,7 +13,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
@@ -24,7 +22,6 @@ import com.hnf.guet.comhnfpatent.util.ServiceUtils;
 import com.hyphenate.chat.EMOptions;
 import com.hnf.guet.comhnfpatent.recevier.LiveService;
 import com.hnf.guet.comhnfpatent.myWedget.chatrow.HxEaseuiHelper;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -89,12 +86,14 @@ public class MyApplication extends MultiDexApplication {
 
         // 初始化环信SDK
         initEasemob();
+
         //初始化友盟
 //        MobclickAgent.startWithConfigure(new MobclickAgent.UMAnalyticsConfig(this,
 //                "594491364ad156566a0011cf","Huawei", MobclickAgent.EScenarioType. E_UM_NORMAL));
 //        MobclickAgent.openActivityDurationTrack(false);
 
     }
+
 
 
     @SuppressLint("NewApi")

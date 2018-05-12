@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 
+import com.hnf.guet.comhnfpatent.base.MyApplication;
+
 import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,6 +50,25 @@ public class UserUtil {
             ((InputMethodManager) mContext
                     .getSystemService(Context.INPUT_METHOD_SERVICE))
                     .toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 显示软键盘
+     */
+    public static void showSoftInput(final Activity mContext, boolean isShow) {
+        try {
+            MyApplication.getHandler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ((InputMethodManager) mContext
+                            .getSystemService(Context.INPUT_METHOD_SERVICE))
+                            .toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }, 300);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
