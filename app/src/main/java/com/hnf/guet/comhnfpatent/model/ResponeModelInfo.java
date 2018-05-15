@@ -4,6 +4,7 @@ import com.hnf.guet.comhnfpatent.model.bean.AcountEntityBean;
 import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/3/29.
@@ -15,6 +16,8 @@ public class ResponeModelInfo implements Serializable {
     private int errorCode;
     private long time;
     public ResultBean result;
+
+
 
 
     public String getResultMsg() {

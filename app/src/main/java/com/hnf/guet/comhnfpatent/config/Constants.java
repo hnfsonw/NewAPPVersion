@@ -13,7 +13,7 @@ import com.hnf.guet.comhnfpatent.util.LogUtils;
 public class Constants {
 
     //服务器请求地址
-    public static final String HOST = "https://10.21.145.179:8443/guet.patent/api/";
+    public static final String HOST = "https://192.168.1.102:8443/guet.patent/api/";
 
     //注册
     public static final String REGISTER = "acountRegister";
@@ -44,6 +44,21 @@ public class Constants {
 
     //找回密码
     public static final String FIND_PASSWORD_BACK = "findPwdBack";
+
+    //获取专业用户的信息
+    public static final String GET_USER_INFOMATION = "insertOrUpdateUserSkills";
+
+    //验证通信令牌是否有效
+    public static final String TOKEN_IS_STILL_WORK = "verificationToken";
+
+    //天机我的收藏
+    public static final String ADD_COLLECTION = "insertCollection";
+
+    //取消我的收藏
+    public static final String CANCLE_COLLECTION = "cancleCollection";
+
+    //查询收藏
+    public static final String COLLECTION_OR_NOR = "queryCollections";
 
 
     public static final int DEBUGLEVEL = LogUtils.LEVEL_ALL;

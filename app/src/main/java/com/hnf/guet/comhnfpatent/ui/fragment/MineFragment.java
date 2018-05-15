@@ -26,6 +26,8 @@ import com.hnf.guet.comhnfpatent.ui.view.VesionDialog;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
 import com.hnf.guet.comhnfpatent.util.UIUtils;
 
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MineFragment extends BaseFragment implements View.OnClickListener{
@@ -87,6 +89,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     protected void dismissNewok() {
+
+    }
+
+    @Override
+    public void setData(List<ResultBean> data) {
 
     }
 

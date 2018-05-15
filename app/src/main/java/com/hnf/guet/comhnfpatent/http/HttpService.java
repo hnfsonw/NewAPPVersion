@@ -93,5 +93,44 @@ public interface HttpService {
     @POST(Constants.UPDATE_FEEL_BACK)
     Call<ResponeModelInfo> updateFeelBackInterface(@FieldMap HashMap<String, Object> fields);
 
+    /**
+     * 获取专业用户的信息
+     * @param fields
+     */
+    @FormUrlEncoded
+    @POST(Constants.GET_USER_INFOMATION)
+    Call<ResponeModelInfo> getUserInfomation(@FieldMap HashMap<String, Object> fields);
+
+    /**
+     * 添加收藏
+     * @param fields
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.ADD_COLLECTION)
+    Call<ResponeModelInfo> addCollection(@FieldMap HashMap<String, Object> fields);
+
+
+    /**
+     * 取消收藏
+     */
+    @FormUrlEncoded
+    @POST(Constants.CANCLE_COLLECTION)
+    Call<ResponeModelInfo> canclecollection(@FieldMap HashMap<String, Object> fields);
+
+    /**
+     * 查询是否已经收藏
+     */
+    @FormUrlEncoded
+    @POST(Constants.COLLECTION_OR_NOR)
+    Call<ResponeModelInfo> queryCollectionOne(@FieldMap HashMap<String, Object> fields);
+
+    /**
+     * 验证token是否有效
+     * @param fields
+     */
+//    @FormUrlEncoded
+//    @POST(Constants.TOKEN_IS_STILL_WORK)
+//    Call<ResponeModelInfo>VerificationToken(@FieldMap HashMap<String, Object> fields);
 
 }

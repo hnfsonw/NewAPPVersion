@@ -19,10 +19,11 @@ import android.widget.Toast;
 
 import com.hnf.guet.comhnfpatent.R;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
+import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
 import com.hnf.guet.comhnfpatent.myWedget.progress.HnfProgress;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
 
-
+import java.util.List;
 
 
 public abstract class BaseFragment extends Fragment{
@@ -236,5 +237,6 @@ public abstract class BaseFragment extends Fragment{
      */
     protected abstract void dismissNewok();
 
+    public abstract void setData(List<ResultBean> data);
 
 }

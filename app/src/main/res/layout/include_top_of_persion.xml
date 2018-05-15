@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="14dp"
+    android:paddingTop="10dp"
+     >
+
+    <LinearLayout
+        android:id="@+id/iv_back_persion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <ImageView
+            android:clickable="true"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="41dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/back"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="人才详情"
+        android:layout_toRightOf="@id/iv_back_persion"
+        android:textSize="18sp"
+        android:layout_marginTop="12dp"
+        android:paddingRight="14dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        />
+
+</RelativeLayout>

@@ -237,6 +237,11 @@ public class LoginPresenter extends BasePresenter {
                 .putString("nickName",data.getResult().getNickName())
                 .putString("imgUrl",data.getResult().getImgUrl())
                 .putString("phone",data.getResult().getPhone())
+                .putString("job",data.getResult().getJob())
+                .putInt("acountType",data.getResult().getAcountType())
+                .putString("workExprience",data.getResult().getWorkExprience())
+                .putString("goodAt",data.getResult().getGoodAt())
+                .putString("infomation",data.getResult().getInfomation())
                 .apply();
 
         //保存token

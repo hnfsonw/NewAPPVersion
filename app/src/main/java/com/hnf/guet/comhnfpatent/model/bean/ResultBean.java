@@ -19,8 +19,85 @@ public class ResultBean implements Serializable {
     private boolean hasNewVersion;
     private int versionCode;
     private String version;
+
+    public boolean isCollected() {
+        return isCollected;
+    }
+
+    public void setCollected(boolean collected) {
+        isCollected = collected;
+    }
+
     private String url;
+    private boolean isCollected;//是否已经收藏
+
+    public List<ResultBean> getUserInfoList() {
+        return userInfoList;
+    }
+
+    public void setUserInfoList(List<ResultBean> userInfoList) {
+        this.userInfoList = userInfoList;
+    }
+
     private String updateTime;
+    private int acountType;//账号类型
+    private String job;//职业
+    private boolean tokenIsWord;//token是否还有效
+    public List<ResultBean> userInfoList;
+
+    public boolean isTokenIsWord() {
+        return tokenIsWord;
+    }
+
+    public void setTokenIsWord(boolean tokenIsWord) {
+        this.tokenIsWord = tokenIsWord;
+    }
+
+    public String getInfomation() {
+        return infomation;
+    }
+
+    public void setInfomation(String infomation) {
+        this.infomation = infomation;
+    }
+
+    private String infomation;
+
+
+    public int getAcountType() {
+        return acountType;
+    }
+
+    public void setAcountType(int acountType) {
+        this.acountType = acountType;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public String getWorkExprience() {
+        return workExprience;
+    }
+
+    public void setWorkExprience(String workExprience) {
+        this.workExprience = workExprience;
+    }
+
+    public String getGoodAt() {
+        return goodAt;
+    }
+
+    public void setGoodAt(String goodAt) {
+        this.goodAt = goodAt;
+    }
+
+    private String workExprience;//工作经验
+    private String goodAt;//擅长领域
 
     private String createTime;
 

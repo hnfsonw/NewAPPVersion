@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e2e2de"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#e2e2de"
+            >
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:src="@mipmap/glass"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/head_img_persion"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="64dp"
+                    android:clickable="true"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/white"
+                    android:src="@mipmap/timg"
+                    >
+                </de.hdodenhof.circleimageview.CircleImageView>
+
+                <TextView
+                    android:id="@+id/nick_tv_person"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户昵称"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="174dp"
+                    />
+
+                <include layout="@layout/include_top_of_persion"/>
+
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="16dp"
+                        android:background="@color/colorAccent"/>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="46dp"
+                        android:text="技能标签"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="18dp"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:background="#e2e2de"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/persion_skills_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:padding="8dp"
+                        android:text="信息安全 软件工程 互联网工程"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="20dp"
+                        />
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="64dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="16dp"
+                        android:background="@color/colorAccent"/>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="46dp"
+                        android:text="个人简介"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="18dp"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:background="#e2e2de"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/persion_information_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:padding="8dp"
+                        android:maxLines="100"
+                        android:ellipsize="end"
+                        android:text="桂林电子科技大学(Guilin University Of Electronic Technology)，简称“桂电”，坐落在世界著名的风景游览城市—桂林市，由工业和信息化部与广西壮族自治区人民政府共建，中西部高校基础能力建设工程重点建设高校， [1]  入选教育部“卓越工程师教育培养计划″、“国家大学生创新性实验计划”、“深化创新创业教育改革示范高校”、是国家“863计划”、“973计划” 承担高校之一，拥有国家大学科技园， [2]  具有自主招生资格。是总装备部通信装备预研项目定向发布的30所高校之一和北斗ICD授权的高校之一"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="20dp"
+                        />
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/hhhh"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        >
+
+        <Button
+            android:id="@+id/touch_hime_btn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="联系TA"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/colorAccent"/>
+
+        <Button
+            android:id="@+id/colletion_btn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="收藏"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_above="@+id/hhhh"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e2e2de"/>
+
+</RelativeLayout>

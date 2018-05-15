@@ -136,7 +136,7 @@ public abstract class BasePresenter {
         public void onFailure(Call<ResponeModelInfo> call, Throwable t) {
             onDissms(t.getMessage());
             //没连上服务器
-            LogUtils.i(TAG,"网络请求失败："+t.getMessage());
+            LogUtils.i(TAG,"解析失败："+t.getMessage());
             Toast.makeText(MyApplication.sInstance, MyApplication.sInstance.getString(R.string.Network_Error), Toast.LENGTH_SHORT).show();
 
         }

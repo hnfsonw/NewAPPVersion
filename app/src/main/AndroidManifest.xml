@@ -99,7 +99,8 @@
         <activity android:name=".ui.activity.HomeActivity" />
         <activity android:name=".ui.view.SelectPicturePopupWindow" />
         <activity android:name=".ui.activity.ModifyPasswordActivity" />
-        <activity android:name=".ui.activity.FeedbackActivity"></activity>
+        <activity android:name=".ui.activity.FeedbackActivity" />
+        <activity android:name=".ui.activity.TalentPersionActivity"></activity>
     </application>
 
 </manifest>

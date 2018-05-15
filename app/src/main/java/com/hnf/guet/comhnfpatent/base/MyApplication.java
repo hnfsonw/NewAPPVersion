@@ -39,6 +39,7 @@ public class MyApplication extends MultiDexApplication {
     public static int sListSize = 0;
     public static String sToken;
     public static long sAcountId;
+    public static String sAcountName;
     public static int sDeviceId;
     public static boolean sHeadset;
     public static ResultBean sResult;
@@ -46,6 +47,7 @@ public class MyApplication extends MultiDexApplication {
     public static String sUserdeviceId = "";
     private SharedPreferences mGlobalVariablesp;
     public static boolean sInUpdata = false;
+    public static boolean tokenIsWork = false;
 
     //进程保活
     public static final int LIVE_JOB_ID = 0;

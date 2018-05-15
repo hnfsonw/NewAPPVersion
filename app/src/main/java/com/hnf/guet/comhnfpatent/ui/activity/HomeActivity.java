@@ -1,6 +1,8 @@
 package com.hnf.guet.comhnfpatent.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
@@ -15,10 +17,14 @@ import android.widget.ImageView;
 import com.google.gson.Gson;
 import com.hnf.guet.comhnfpatent.R;
 import com.hnf.guet.comhnfpatent.base.BaseActivity;
+import com.hnf.guet.comhnfpatent.base.BaseFragment;
+import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.factory.FragmentFactory;
 import com.hnf.guet.comhnfpatent.model.ExitModel;
+import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
 import com.hnf.guet.comhnfpatent.presenter.HomePresenter;
 import com.hnf.guet.comhnfpatent.ui.activity.acountActivity.LoginActivity;
+import com.hnf.guet.comhnfpatent.ui.fragment.HomeFragment;
 import com.hnf.guet.comhnfpatent.ui.view.BottomTab;
 import com.hnf.guet.comhnfpatent.ui.view.BottomTabLayout;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
@@ -43,12 +49,8 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.iv_error)
     public ImageView mIvError;
 
-//    @BindView(R.id.include)
-//    View mView;
 
-    private HomePresenter mPresenter;
-
-    private String[] mTabNames = { "首页", "找专家","我有好主意","消息","我的"};
+    private String[] mTabNames = { "首页","消息","我的"};
     public static boolean isForeground = false;
     public boolean isOnResume;
     private int mQueryState = 0;   //用来控制当前界面不在HomeActivity 刷新UI
@@ -56,14 +58,17 @@ public class HomeActivity extends BaseActivity {
     //底部控件
     private List<BottomTab> mBottomTabs = new ArrayList<>();
     private Fragment fm;
+    private List<ResultBean> mResultList;
+    private int resultListSize;
+    private HomePresenter mHomePresenter;
+    private SharedPreferences mGlobalvariable;
+    private String macountName;
 
     /**
      * 默认状态下的本地图片
      */
     private int[] mUnSelectIcons = {
             R.mipmap.home,
-            R.mipmap.group,
-            R.mipmap.idea,
             R.mipmap.message,
             R.mipmap.my};
 
@@ -72,8 +77,6 @@ public class HomeActivity extends BaseActivity {
      */
     private int[] mSelectIcons = {
             R.mipmap.home_select,
-            R.mipmap.group_select,
-            R.mipmap.idea_seclect,
             R.mipmap.message_select,
             R.mipmap.my_select};
 
@@ -84,11 +87,6 @@ public class HomeActivity extends BaseActivity {
     private int mUnSelectColor = R.color.unSelectColor;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        onTabItemSelected(0);
-    }
 
     @Override
     protected int getLayoutRes() {
@@ -97,39 +95,29 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        if (mPresenter == null){
-            mPresenter = new HomePresenter(this,this);
+        if (mHomePresenter == null){
+            mHomePresenter = new HomePresenter(this,this);
         }
         if (mGson == null){
             mGson = new Gson();
         }
-
-        EventBus.getDefault().register(this);
+        mGlobalvariable = this.getSharedPreferences("globalvariable", Context.MODE_PRIVATE);
+        macountName = mGlobalvariable.getString("acountName","");
+        LogUtils.e(TAG,"acounName的值"+macountName);
+//        EventBus.getDefault().register(this);
         initView();
         initData(false);
     }
 
-    /**
-     * 更新数据
-     */
-    @Subscribe(threadMode = ThreadMode.MAIN)  //表示这个方法在主线程执行
-    public void onUpdate(){
-        LogUtils.i(TAG,"更新设备");
 
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onExit(ExitModel exitModel){
+//        LogUtils.e(TAG,"退出");
+//        FragmentFactory.mCacheFragmentMap.clear();
+//        toActivity(LoginActivity.class,0);
+//        finishActivityByAnimation(this);
+//    }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onExit(ExitModel exitModel){
-        LogUtils.e(TAG,"退出");
-        toActivity(LoginActivity.class,0);
-        finishActivityByAnimation(this);
-    }
-
-    //刷新
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void refresh(){
-//        mView.setVisibility(View.GONE);
-    }
 
     //重写onkeydown方法
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -156,6 +144,7 @@ public class HomeActivity extends BaseActivity {
 
         }
         mMBottomTabLayout.setBottomTabData(mBottomTabs);
+        mHomePresenter.queryUserInfoList(MyApplication.sToken,macountName);
     }
 
 
@@ -163,13 +152,16 @@ public class HomeActivity extends BaseActivity {
         mMBottomTabLayout.setOnTabChangeListener(new BottomTabLayout.OnTabChangeListener() {
             @Override
             public void onTabSelect(int position) {
-//                if (position == 0){
+                if (mResultList == null){
+                    mHomePresenter.queryUserInfoList(MyApplication.sToken,macountName);
+                    return;
+                }
                 onTabItemSelected(position);
-//                }else if (position == 1){
-//                    onTabSelected(position);
-//                }else {
-                onTabSelected(position);
-//                }
+
+                if (position == 0 && resultListSize >= 1){
+                    HomeFragment homeFragment = (HomeFragment) fm;
+                    homeFragment.setList(mResultList);
+                }
             }
 
             @Override
@@ -203,16 +195,38 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void dismissNewok() {
-        if (mPresenter.resultData != null){
-            mPresenter.resultData.cancel();
+        if (mHomePresenter.resultData != null){
+            mHomePresenter.resultData.cancel();
         }
     }
 
+    public void queryUserInfoListSuccess(List<ResultBean> userInfoList) {
+        dismissLoading();
+        LogUtils.e(TAG,"查询用户列表成功"+userInfoList.size());
+        mResultList = userInfoList;
+        resultListSize = mResultList.size();
+        mQueryState = 1;
+        if (isOnResume){
+            mMBottomTabLayout.setCurrentTab(0);
+            onTabItemSelected(0);
+            HomeFragment homeFragment = (HomeFragment) fm;
+            homeFragment.setData(mResultList);
+            mQueryState = 0;
+        }
+    }
+
+
     @Override
     protected void onResume() {
-
         isForeground = true;
         isOnResume = true;
+        if (mQueryState == 1){
+            mMBottomTabLayout.setCurrentTab(0);
+            onTabItemSelected(0);
+            BaseFragment baseFragment = (BaseFragment) fm;
+            baseFragment.setData(mResultList);
+            mQueryState = 0;
+        }
         super.onResume();
     }
 
@@ -228,6 +242,7 @@ public class HomeActivity extends BaseActivity {
         isForeground = false;
         super.onDestroy();
     }
+
 
 
 }

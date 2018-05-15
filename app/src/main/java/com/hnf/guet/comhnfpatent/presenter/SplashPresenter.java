@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.hnf.guet.comhnfpatent.base.BasePresenter;
+import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.download.DownloadApi;
 import com.hnf.guet.comhnfpatent.download.DownloadProgressHandler;
 import com.hnf.guet.comhnfpatent.download.ProgressHelper;
@@ -45,6 +46,7 @@ public class SplashPresenter extends BasePresenter{
     private Context mContext;
     public Call<ResponseBody> mDownloadCall;
     private File mFile;
+    public Call<ResponeModelInfo> resutData;
 
     public SplashPresenter(Context context, SplashActivity splashActivity){
         super(context);
@@ -194,5 +196,22 @@ public class SplashPresenter extends BasePresenter{
             public void onFailure(Call<ResponseBody> call, Throwable t) {
             }
         });
+    }
+
+    //验证token是否还有效
+    public void verificationToken(String sToken) {
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("token",sToken);
+//        resutData = mHttpService.VerificationToken(hashMap);
+        resutData.enqueue(mCallback2);
+    }
+
+    @Override
+    protected void onSuccess(ResponeModelInfo body) {
+        if (body.getResult().isTokenIsWord()){
+            MyApplication.tokenIsWork = true;
+        }else {
+            MyApplication.tokenIsWork = false;
+        }
     }
 }

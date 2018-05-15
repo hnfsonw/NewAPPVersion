@@ -43,6 +43,7 @@ public class SplashActivity extends BaseActivity {
     private int mType;
     public boolean isDownload;
 
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_splash;
@@ -54,6 +55,7 @@ public class SplashActivity extends BaseActivity {
         mGlobalVariable = getSharedPreferences("globalvariable",MODE_PRIVATE);
         mIsLogin = mGlobalVariable.getBoolean("login",false);
         LogUtils.e(TAG,"环信是否已经登录过："+mIsLogin);
+//        mSplashPresenter.verificationToken(MyApplication.sToken);
         mHandler = new Handler();
         if (EMClient.getInstance().isLoggedInBefore() && EMClient.getInstance().isConnected()){
             //加载所有会话到内存
@@ -78,6 +80,8 @@ public class SplashActivity extends BaseActivity {
 
     public void initView() {
         Log.d(TAG, "login: " + mIsLogin);
+
+
         //判断sdk是否登录过，并且没有退出或者被踢，否则跳转到登录界面；
         if (!EMClient.getInstance().isLoggedInBefore()){
             toActivity(LoginActivity.class);
@@ -85,9 +89,15 @@ public class SplashActivity extends BaseActivity {
             return;
         }
         if (mIsLogin){
-            exitHomeActivity();
-            toActivity(HomeActivity.class);
-            finishActivityByAnimation(this);
+//            if (MyApplication.tokenIsWork){
+                exitHomeActivity();
+                toActivity(HomeActivity.class);
+                finishActivityByAnimation(this);
+//            }else {
+//                printn("token过期，请重新登录");
+//                return;
+//            }
+
         }else{
             exitHomeActivity();
             toActivity(LoginActivity.class);

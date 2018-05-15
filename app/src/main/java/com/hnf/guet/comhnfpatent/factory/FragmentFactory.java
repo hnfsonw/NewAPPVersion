@@ -20,10 +20,8 @@ import java.util.Map;
  */
 public class FragmentFactory {
     public static final int HOME_FRAGMENT = 0;//首页
-    public static final int FIND_PROFESS_FRAGMENT = 1;//找专家
-    public static final int HAVE_IDEAR_FRAGMENT = 2;//我有好主意
-    public static final int MESSAGE_FRAGMENT = 3;//消息
-    public static final int MINE_FRAGMENT = 4;//我的
+    public static final int MESSAGE_FRAGMENT = 1;//消息
+    public static final int MINE_FRAGMENT = 2;//我的
     private static final String TAG = "FragmentFactory";
 
     public static Map<Integer, Fragment> mCacheFragmentMap = new HashMap<>();
@@ -39,14 +37,6 @@ public class FragmentFactory {
         switch (position) {
             case HOME_FRAGMENT:
                 fragment = new HomeFragment();
-                break;
-
-            case FIND_PROFESS_FRAGMENT:
-                fragment = new FindProfessorFragment();
-                break;
-
-            case HAVE_IDEAR_FRAGMENT:
-                fragment = new HaveIdearFragment();
                 break;
 
             case MESSAGE_FRAGMENT:

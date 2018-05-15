@@ -11,6 +11,52 @@ public class AcountEntityBean implements Serializable{
     private String phone;
     private String imgUrl;
     private String lastLongTime;
+    private int acountType;
+    private String job;
+    private String workExprience;
+    private String goodAt;
+    private String infomation;
+
+    public String getWorkExprience() {
+        return workExprience;
+    }
+
+    public void setWorkExprience(String workExprience) {
+        this.workExprience = workExprience;
+    }
+
+    public int getAcountType() {
+        return acountType;
+    }
+
+    public void setAcountType(int acountType) {
+        this.acountType = acountType;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+
+    public String getGoodAt() {
+        return goodAt;
+    }
+
+    public void setGoodAt(String goodAt) {
+        this.goodAt = goodAt;
+    }
+
+    public String getInfomation() {
+        return infomation;
+    }
+
+    public void setInfomation(String infomation) {
+        this.infomation = infomation;
+    }
 
     public int getAcountId() {
         return acountId;
