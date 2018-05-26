@@ -58,16 +58,9 @@ public abstract class BasePresenter {
         mGlobalvariable = context.getSharedPreferences("globalvariable", 0);
         mContext = context;
         OkHttpClient builder = getBuilder();
-
-//        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//                .sslSocketFactory(SSLHelper.getSSLCertifcation(mContext))
-//                .hostnameVerifier(new UnSafeHostnameVerifier())
-//                .build();
-
         mRetrofit = new Retrofit.Builder().
                 baseUrl(Constants.HOST).
                 addConverterFactory(GsonConverterFactory.create()).
-//                client(okHttpClient).
                 client(builder).
                 build();
         mHttpService = mRetrofit.create(HttpService.class);
@@ -88,12 +81,7 @@ public abstract class BasePresenter {
                 Log.d(TAG, "http日志:"+message);
             }
         });
-        // 开发模式记录整个body，否则只记录基本信息如返回200，http协议版本等
-//        if (BuildConfig.DEBUG) {
-            mInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        } else {
-//            mInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-//        }
+        mInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.addInterceptor(mInterceptor)
                 .connectTimeout(60, TimeUnit.SECONDS)//设置超时
                 .readTimeout(60, TimeUnit.SECONDS)

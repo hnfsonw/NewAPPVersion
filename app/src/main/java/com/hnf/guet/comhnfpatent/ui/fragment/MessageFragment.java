@@ -1,24 +1,46 @@
 package com.hnf.guet.comhnfpatent.ui.fragment;
 
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.hnf.guet.comhnfpatent.R;
 import com.hnf.guet.comhnfpatent.base.BaseFragment;
-import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
+import com.hnf.guet.comhnfpatent.ui.activity.ChatActivity;
+import com.hyphenate.chat.EMConversation;
+import com.hyphenate.easeui.EaseConstant;
+import com.hyphenate.easeui.ui.EaseConversationListFragment;
 
 import java.util.List;
 
 public class MessageFragment extends BaseFragment {
     @Override
     protected View getLayoutRes(LayoutInflater inflater, @Nullable Bundle savedInstanceState) {
-        return null;
+        View view = inflater.inflate(R.layout.message_fragment,null);
+        return view;
     }
 
     @Override
     protected void init() {
+        MyConversationListFragment conversationListFragment = new MyConversationListFragment();
+        getFragmentManager().beginTransaction().add(R.id.fragment_container,conversationListFragment)
+                .show(conversationListFragment)
+                .commit();
+
+//        conversationListFragment.setConversationListItemClickListener(new EaseConversationListFragment.EaseConversationListItemClickListener() {
+//            @Override
+//            public void onListItemClicked(EMConversation conversation) {
+//                String username = conversation.conversationId();
+//                Intent intent = new Intent(getActivity(), ChatActivity.class);
+//                intent.putExtra(EaseConstant.EXTRA_USER_ID,username);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 

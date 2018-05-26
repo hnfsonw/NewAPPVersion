@@ -133,4 +133,10 @@ public interface HttpService {
 //    @POST(Constants.TOKEN_IS_STILL_WORK)
 //    Call<ResponeModelInfo>VerificationToken(@FieldMap HashMap<String, Object> fields);
 
+    /**
+     * 插入数据
+     */
+    @FormUrlEncoded
+    @POST(Constants.INSERT_NEW_IDEA)
+    Call<ResponeModelInfo> insertNewIdea(@FieldMap HashMap<String, Object> fields);
 }

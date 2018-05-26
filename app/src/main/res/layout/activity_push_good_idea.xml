@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".ui.activity.PushGoodIdeaActivity">
+    <include layout="@layout/include_title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/idea_title_editText"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="请输入标题"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="4dp"
+                android:lines="1"
+                android:maxLength="20"
+                android:textSize="14sp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#d3d3d3"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:background="@null"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text=""
+                android:id="@+id/idea_content_editText"
+                android:lines="10"
+                android:gravity="top"
+                android:maxLength="200"
+                android:textSize="14sp"
+                android:hint="请大概描述一下您的需求或者想法~"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <TextView
+                android:id="@+id/idea_content_number_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="99/200字"
+                android:textAlignment="viewEnd"
+                android:layout_marginRight="16dp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#d3d3d3"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/idea_imga_one"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="16dp"
+                    />
+                <ImageView
+                    android:id="@+id/idea_imga_two"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="8dp"
+                    />
+                <ImageView
+                    android:id="@+id/idea_imga_three"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="8dp"
+                    />
+                <ImageView
+                    android:id="@+id/idea_imga_four"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="8dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="24dp">
+
+                <Button
+                    android:id="@+id/idea_image_btn"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@mipmap/image"
+                    android:layout_margin="6dp"/>
+
+                <Button
+                    android:id="@+id/idea_file_btn"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@mipmap/file"
+                    android:layout_margin="6dp"/>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/idea_commit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/edg_shape_pink"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="发 布"
+                android:textColor="@color/white"
+                android:layout_marginBottom="40dp"
+                android:textSize="16sp"/>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

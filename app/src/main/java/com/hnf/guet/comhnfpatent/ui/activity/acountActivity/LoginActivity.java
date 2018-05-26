@@ -119,7 +119,7 @@ public class LoginActivity extends BaseActivity {
                 mPassword = data.getStringExtra("password");
                 mEtLoginUsername.setText(mPhone);
                 mEtLoginPassword.setText(mPassword);
-                toActivity(HomeFragment.class);
+                toActivity(HomeActivity.class);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

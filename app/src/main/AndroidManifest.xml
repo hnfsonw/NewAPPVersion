@@ -97,10 +97,11 @@
         <activity android:name=".ui.activity.acountActivity.ForgetActivity" />
         <activity android:name=".ui.activity.acountActivity.ForgetAndResetPassActivity" />
         <activity android:name=".ui.activity.HomeActivity" />
-        <activity android:name=".ui.view.SelectPicturePopupWindow" />
         <activity android:name=".ui.activity.ModifyPasswordActivity" />
         <activity android:name=".ui.activity.FeedbackActivity" />
-        <activity android:name=".ui.activity.TalentPersionActivity"></activity>
+        <activity android:name=".ui.activity.TalentPersionActivity" />
+        <activity android:name=".ui.activity.ChatActivity" />
+        <activity android:name=".ui.activity.PushGoodIdeaActivity"></activity>
     </application>
 
 </manifest>

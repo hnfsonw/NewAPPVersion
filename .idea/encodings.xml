@@ -12,7 +12,6 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/include_login.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/include_title.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/view_bottom_tab.xml" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/view_item_setting.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/no_view_register.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/phone_login.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/phone_password.png" charset="GBK" />
@@ -42,7 +41,11 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/verification_codes.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/easeui" charset="GBK" />
     <file url="file://$PROJECT_DIR$/easeui/libs/BaiduLBS_Android.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/easeui/libs/arm64-v8a" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easeui/libs/armeabi-v7a" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/easeui/libs/hyphenatechat_3.4.0.1.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/easeui/libs/hyphenatechat_3.4.0.1.jar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easeui/libs/x86" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/easeui/src/main/java/com/hyphenate/easeui/ui/EaseBaiduMapActivity.java" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

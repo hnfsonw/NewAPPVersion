@@ -16,6 +16,8 @@ import com.hnf.guet.comhnfpatent.base.BaseActivity;
 import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.presenter.TalentPersionPresenter;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,6 +55,8 @@ public class TalentPersionActivity extends BaseActivity {
 
     private TalentPersionPresenter talentPersionPresenter;
     private Context mContext;
+    private String nickName;
+    private String tagAcount;//点击的专家的账号
 
     @Override
     protected int getLayoutRes() {
@@ -65,6 +69,8 @@ public class TalentPersionActivity extends BaseActivity {
         final Intent intent = getIntent();
         LogUtils.e(TAG,"acountName:"+intent.getStringExtra("acountName"));
         selectedAcountName = intent.getStringExtra("acountName");
+        nickName = intent.getStringExtra("nickName");
+        tagAcount = intent.getStringExtra("acountName");
         initData();
 
         new Thread(new Runnable() {
@@ -126,6 +132,11 @@ public class TalentPersionActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.touch_hime_btn:
                 LogUtils.e(TAG,"联系他");
+                //从这里进入与专家的聊天界面
+                Intent chatIntent = new Intent(TalentPersionActivity.this,ChatActivity.class);
+                chatIntent.putExtra(EaseConstant.EXTRA_USER_ID,nickName);
+                chatIntent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
+                startActivity(chatIntent);
                 break;
             case R.id.colletion_btn:
                 if (collectionBtn.isSelected() == false){

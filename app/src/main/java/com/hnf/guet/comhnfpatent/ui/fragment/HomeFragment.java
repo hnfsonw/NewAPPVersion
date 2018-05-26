@@ -17,6 +17,7 @@ import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
 import com.hnf.guet.comhnfpatent.presenter.HomeFragmentPresenter;
+import com.hnf.guet.comhnfpatent.ui.activity.PushGoodIdeaActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.TalentPersionActivity;
 import com.hnf.guet.comhnfpatent.ui.adapter.HomeFragmrntAdapter;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
@@ -118,12 +119,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         switch (view.getId()){
             case R.id.aaa_img:
 
+                LogUtils.i(TAG,"专利转让");
                 break;
             case R.id.bbb_img:
-
+                LogUtils.i(TAG,"发布需求");
+                Intent pushIdae = new Intent(getActivity(), PushGoodIdeaActivity.class);
+                startActivity(pushIdae);
                 break;
             case R.id.ccc_img:
-
+                LogUtils.i(TAG,"咨询专家");
                 break;
         }
 

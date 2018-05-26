@@ -199,12 +199,12 @@ public class SplashPresenter extends BasePresenter{
     }
 
     //验证token是否还有效
-    public void verificationToken(String sToken) {
-        HashMap<String,Object> hashMap = new HashMap<>();
-        hashMap.put("token",sToken);
+//    public void verificationToken(String sToken) {
+//        HashMap<String,Object> hashMap = new HashMap<>();
+//        hashMap.put("token",sToken);
 //        resutData = mHttpService.VerificationToken(hashMap);
-        resutData.enqueue(mCallback2);
-    }
+//        resutData.enqueue(mCallback2);
+//    }
 
     @Override
     protected void onSuccess(ResponeModelInfo body) {
