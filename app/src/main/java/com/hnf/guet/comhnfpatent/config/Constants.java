@@ -13,7 +13,7 @@ import com.hnf.guet.comhnfpatent.util.LogUtils;
 public class Constants {
 
     //服务器请求地址
-    public static final String HOST = "https://192.168.191.5:8443/guet.patent/api/";
+    public static final String HOST = "https://10.21.144.99:8443/guet.patent/api/";
 
     //注册
     public static final String REGISTER = "acountRegister";
@@ -63,6 +63,11 @@ public class Constants {
     //添加需求信息
     public static final String INSERT_NEW_IDEA = "insertNewIdeas";
 
+    //上传图片
+    public static final String UPLOAD_IMAGES = "uploadImages";
+
+    //两者都传
+    public static final String UPLOAD_ALL = "uploadAll";
 
     public static final int DEBUGLEVEL = LogUtils.LEVEL_ALL;
     public static final int StateSuccess = 0;//成功

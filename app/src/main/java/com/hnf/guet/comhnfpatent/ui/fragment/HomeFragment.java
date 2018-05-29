@@ -17,11 +17,14 @@ import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
 import com.hnf.guet.comhnfpatent.presenter.HomeFragmentPresenter;
+import com.hnf.guet.comhnfpatent.ui.activity.FindProfessActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.PushGoodIdeaActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.TalentPersionActivity;
 import com.hnf.guet.comhnfpatent.ui.adapter.HomeFragmrntAdapter;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -128,6 +131,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.ccc_img:
                 LogUtils.i(TAG,"咨询专家");
+                Intent findIntent = new Intent(getActivity(), FindProfessActivity.class);
+                findIntent.putExtra("list",(Serializable) resultList);
+                startActivity(findIntent);
                 break;
         }
 

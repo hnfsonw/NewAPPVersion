@@ -101,7 +101,15 @@
         <activity android:name=".ui.activity.FeedbackActivity" />
         <activity android:name=".ui.activity.TalentPersionActivity" />
         <activity android:name=".ui.activity.ChatActivity" />
-        <activity android:name=".ui.activity.PushGoodIdeaActivity"></activity>
+        <activity android:name=".ui.activity.PushGoodIdeaActivity" />
+        <activity
+            android:name="com.foamtrace.photopicker.PhotoPickerActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/PhotoPickerTheme" />
+        <activity
+            android:name="com.foamtrace.photopicker.PhotoPreviewActivity"
+            android:theme="@style/PhotoPickerTheme" />
+        <activity android:name=".ui.activity.FindProfessActivity"></activity>
     </application>
 
 </manifest>

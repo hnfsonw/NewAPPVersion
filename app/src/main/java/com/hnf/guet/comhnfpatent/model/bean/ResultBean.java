@@ -19,6 +19,15 @@ public class ResultBean implements Serializable {
     private boolean hasNewVersion;
     private int versionCode;
     private String version;
+    private List<IdeaEntity> ideaList;
+
+    public List<IdeaEntity> getIdeaList() {
+        return ideaList;
+    }
+
+    public void setIdeaList(List<IdeaEntity> ideaList) {
+        this.ideaList = ideaList;
+    }
 
     public boolean isCollected() {
         return isCollected;

@@ -4,12 +4,18 @@ import com.hnf.guet.comhnfpatent.config.Constants;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 /**
  * Created by Administrator on 2018/3/24.
@@ -134,9 +140,14 @@ public interface HttpService {
 //    Call<ResponeModelInfo>VerificationToken(@FieldMap HashMap<String, Object> fields);
 
     /**
-     * 插入数据
+     * 插入新的需求信息
      */
     @FormUrlEncoded
     @POST(Constants.INSERT_NEW_IDEA)
     Call<ResponeModelInfo> insertNewIdea(@FieldMap HashMap<String, Object> fields);
+
+    @Multipart
+    @POST(Constants.UPLOAD_IMAGES)
+    Call<ResponeModelInfo> uploadImages(@Part List<MultipartBody.Part> partList);
+
 }

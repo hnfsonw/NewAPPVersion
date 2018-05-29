@@ -65,4 +65,7 @@ dependencies {
     implementation 'com.github.yalantis:ucrop:2.2.2'
     implementation 'com.kevin:crop:1.0.2'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+    implementation 'com.foamtrace:photopicker:1.0'
+    implementation 'com.leon:lfilepickerlibrary:1.8.0'
 }

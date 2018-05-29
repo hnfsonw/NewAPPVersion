@@ -25,8 +25,7 @@
     <color name="black">#000000</color>
     <color name="grzx_rz">#B7B7B7</color>
     <color name="register">#5658c9</color>
-    <color name="selected_bg">#d1d1ce</color>
+    <color name="selected_bg">#e2e2df</color>
     <color name="feebback">#e6e3e3</color>
-
-
+    <color name="photopicker_background">#181819</color>
 </resources>
