@@ -32,15 +32,6 @@ public class MessageFragment extends BaseFragment {
                 .show(conversationListFragment)
                 .commit();
 
-//        conversationListFragment.setConversationListItemClickListener(new EaseConversationListFragment.EaseConversationListItemClickListener() {
-//            @Override
-//            public void onListItemClicked(EMConversation conversation) {
-//                String username = conversation.conversationId();
-//                Intent intent = new Intent(getActivity(), ChatActivity.class);
-//                intent.putExtra(EaseConstant.EXTRA_USER_ID,username);
-//                startActivity(intent);
-//            }
-//        });
 
     }
 

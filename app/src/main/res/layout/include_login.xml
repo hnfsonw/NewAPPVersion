@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="25dp"
     android:paddingRight="14dp"
-    android:background="@mipmap/half_title" >
+    android:background="@color/colorAccent" >
 
     <LinearLayout
         android:id="@+id/iv_back"

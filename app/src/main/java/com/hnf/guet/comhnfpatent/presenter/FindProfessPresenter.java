@@ -3,6 +3,7 @@ package com.hnf.guet.comhnfpatent.presenter;
 import android.content.Context;
 
 import com.hnf.guet.comhnfpatent.base.BasePresenter;
+import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.ui.activity.FindProfessActivity;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
@@ -45,5 +46,31 @@ public class FindProfessPresenter extends BasePresenter {
         mResultData = mHttpService.getUserInfomation(hashMap);
         myActivity.showLoading("正在加载数据……");
         mResultData.enqueue(mCallback);
+    }
+
+    /**
+     * 根据用户的输入做查询
+     * @param searchConent
+     */
+    public void searchFilter(String searchConent) {
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("keyWords",searchConent);
+        map.put("token", MyApplication.sToken);
+        mResultData = mHttpService.queryProfessByKeywords(map);
+        myActivity.showLoading("");
+        mResultData.enqueue(mCallback2);
+    }
+
+    @Override
+    protected void onSuccess(ResponeModelInfo body) {
+        super.onSuccess(body);
+        myActivity.sendBackResultLists(body.getResult().getUserInfoList());
+    }
+
+    @Override
+    protected void onError(ResponeModelInfo body) {
+        super.onError(body);
+        myActivity.dismissLoading();
+        myActivity.printn(body.getResultMsg());
     }
 }

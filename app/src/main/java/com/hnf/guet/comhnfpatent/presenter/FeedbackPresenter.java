@@ -55,9 +55,6 @@ public class FeedbackPresenter extends BasePresenter {
         hashMap.put("token",token);
         hashMap.put("acountId",acountId);
         hashMap.put("content",content);
-
-        LogUtils.e(TAG,"insertOrUpdateOpinions "+String.valueOf(hashMap));
-
         mCall = mHttpService.updateFeelBackInterface(hashMap);
         mFeedbackActivity.showLoading("");
         mCall.enqueue(mCallback);

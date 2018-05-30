@@ -16,11 +16,16 @@ import com.hnf.guet.comhnfpatent.R;
 import com.hnf.guet.comhnfpatent.base.BaseActivity;
 import com.hnf.guet.comhnfpatent.base.BaseFragment;
 import com.hnf.guet.comhnfpatent.base.MyApplication;
+import com.hnf.guet.comhnfpatent.factory.FragmentFactory;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
+import com.hnf.guet.comhnfpatent.presenter.MinePresenter;
 import com.hnf.guet.comhnfpatent.presenter.SplashPresenter;
+import com.hnf.guet.comhnfpatent.ui.activity.AboutMeActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.FeedbackActivity;
+import com.hnf.guet.comhnfpatent.ui.activity.HomeActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.ModifyPasswordActivity;
+import com.hnf.guet.comhnfpatent.ui.view.RemoveDialog;
 import com.hnf.guet.comhnfpatent.ui.view.SelectPicturePopupWindow;
 import com.hnf.guet.comhnfpatent.ui.view.VesionDialog;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
@@ -63,6 +68,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     private SelectPicturePopupWindow selectPop;
     private ResultBean mResult;
     private VesionDialog mVersionDialog;
+    private MinePresenter presenter;
+    private HomeActivity hActivity;
+    private RemoveDialog mRemoveDialog;
 
 
     @Override
@@ -83,6 +91,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     protected void init() {
+        hActivity = (HomeActivity) getActivity();
+        presenter = new MinePresenter(getContext(),hActivity);
         initView();
         initListener();
     }
@@ -124,6 +134,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 LogUtils.e(TAG, "收藏");
                 break;
             case R.id.my_message_layout:
+                HomeActivity homeActivity = (HomeActivity) getActivity();
+                homeActivity.toMessageFragment();
                 LogUtils.e(TAG, "消息");
                 break;
             case R.id.reset_pass_layout:
@@ -132,6 +144,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 getActivity().startActivity(intent);
                 break;
             case R.id.version_upgrade_layout:
+                presenter.checkNewVersion();
 
                 break;
             case R.id.feed_back_layout:
@@ -139,12 +152,19 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 getActivity().startActivity(feebIntent);
                 break;
             case R.id.about_me_layout:
-
+                Intent toMe = new Intent(getActivity(), AboutMeActivity.class);
+                startActivity(toMe);
                 break;
             case R.id.login_out_btn:
+                showDialog();
                 LogUtils.e(TAG, "btn");
                 break;
         }
+    }
+
+    private void showDialog() {
+        mRemoveDialog.show();
+        mRemoveDialog.initTitle("确认退出吗？",false);
     }
 
     private void selelctPicture() {
@@ -153,7 +173,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
 
     private void initView() {
-
+        if (mRemoveDialog == null){
+            mRemoveDialog = new RemoveDialog(getContext(),(HomeActivity)getActivity());
+        }
     }
 
 

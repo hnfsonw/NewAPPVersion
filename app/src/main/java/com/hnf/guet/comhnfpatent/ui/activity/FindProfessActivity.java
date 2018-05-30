@@ -58,7 +58,6 @@ public class FindProfessActivity extends BaseActivity {
     @Override
     protected void init() {
         resultList = (List<ResultBean>) getIntent().getSerializableExtra("list");
-        LogUtils.e(TAG,"哈哈哈"+resultList.get(0).getJob());
         if (mpresenter == null){
             mpresenter = new FindProfessPresenter(this,this);
         }
@@ -97,7 +96,11 @@ public class FindProfessActivity extends BaseActivity {
                 finishActivityByAnimation(this);
                 break;
             case R.id.search_btn_findProfess:
-
+                if (searchConent.length() == 0){
+                    printn("请输入搜索内容");
+                    return;
+                }
+                mpresenter.searchFilter(searchConent);
                 break;
         }
 
@@ -130,5 +133,15 @@ public class FindProfessActivity extends BaseActivity {
         dismissLoading();
         mResultBean = new ResultBean();
         LogUtils.i(TAG,"获取信息失败");
+    }
+
+    /**
+     * 返回查询数组
+     * @param userInfoList
+     */
+    public void sendBackResultLists(List<ResultBean> userInfoList) {
+        dismissLoading();
+        findProfessAdapter = new FindProfessAdapter(this,this,userInfoList);
+        mListview.setAdapter(findProfessAdapter);
     }
 }

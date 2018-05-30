@@ -150,4 +150,11 @@ public interface HttpService {
     @POST(Constants.UPLOAD_IMAGES)
     Call<ResponeModelInfo> uploadImages(@Part List<MultipartBody.Part> partList);
 
+
+    /**
+     * 根据关键词查询专家
+     */
+    @FormUrlEncoded
+    @POST(Constants.QUERY_FROFESS_BY_KEY_WORDS)
+    Call<ResponeModelInfo> queryProfessByKeywords(@FieldMap HashMap<String, Object> fields);
 }

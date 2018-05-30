@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -25,9 +27,12 @@ import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
 import com.hnf.guet.comhnfpatent.presenter.HomePresenter;
 import com.hnf.guet.comhnfpatent.ui.activity.acountActivity.LoginActivity;
 import com.hnf.guet.comhnfpatent.ui.fragment.HomeFragment;
+import com.hnf.guet.comhnfpatent.ui.fragment.MessageFragment;
 import com.hnf.guet.comhnfpatent.ui.view.BottomTab;
 import com.hnf.guet.comhnfpatent.ui.view.BottomTabLayout;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -44,7 +49,7 @@ public class HomeActivity extends BaseActivity {
     FrameLayout mHomeContainer;
 
     @BindView(R.id.mBottomTabLayout)
-    BottomTabLayout mMBottomTabLayout;
+    public BottomTabLayout mMBottomTabLayout;
 
     @BindView(R.id.iv_error)
     public ImageView mIvError;
@@ -135,7 +140,7 @@ public class HomeActivity extends BaseActivity {
     /**
      * 初始化数据
      */
-    private void initData(boolean isUrl) {
+    public void initData(boolean isUrl) {
         mBottomTabs.clear();
         for (int i = 0;i<mUnSelectIcons.length;i++){
             BottomTab mBottomTab = new BottomTab(mTabNames[i],mUnSelectColor,mSelectColor,
@@ -148,7 +153,7 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-    private void initView() {
+    public void initView() {
         mMBottomTabLayout.setOnTabChangeListener(new BottomTabLayout.OnTabChangeListener() {
             @Override
             public void onTabSelect(int position) {
@@ -171,7 +176,7 @@ public class HomeActivity extends BaseActivity {
         });
     }
 
-    private void onTabItemSelected(int position) {
+    public void onTabItemSelected(int position) {
         changeFragment(FragmentFactory.createFragment(position));
     }
 
@@ -244,5 +249,38 @@ public class HomeActivity extends BaseActivity {
     }
 
 
+    private FragmentManager fManager;
+    private FragmentTransaction transaction;
 
+    public void toMessageFragment(){
+        onTabItemSelected(1);
+        mMBottomTabLayout.setCurrentTab(1);
+    }
+
+    public void sureLoginOut() {
+        showLoading("");
+        EMClient.getInstance().logout(false, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                Log.i("HomeActivity", "退出成功");
+                mGlobalvariable.edit().putBoolean("login",false).apply();
+                exitHomeActivity();
+                Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finishActivityByAnimation(HomeActivity.this);
+                dismissLoading();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Log.i("LoginPresenter", "退出失败 " + i + " - " + s);
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
+    }
 }
