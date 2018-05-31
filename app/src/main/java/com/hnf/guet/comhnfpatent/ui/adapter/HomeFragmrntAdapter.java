@@ -81,19 +81,19 @@ public class HomeFragmrntAdapter extends BaseAdapter{
 
         final ResultBean resultBeanB =  resultDatas.get(position);
         //怎么图片的url加载图片
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectDiskReads()
-                .detectDiskWrites()
-                .detectNetwork()
-                .penaltyLog()
-                .build());
-
-        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                .detectLeakedSqlLiteObjects()
-                .detectLeakedClosableObjects()
-                .penaltyLog()
-                .penaltyDeath()
-                .build());
+//        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+//                .detectDiskReads()
+//                .detectDiskWrites()
+//                .detectNetwork()
+//                .penaltyLog()
+//                .build());
+//
+//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+//                .detectLeakedSqlLiteObjects()
+//                .detectLeakedClosableObjects()
+//                .penaltyLog()
+//                .penaltyDeath()
+//                .build());
         viewHolder.headerImg.setTag(resultDatas.get(position).getImgUrl());
         viewHolder.headerImg.setImageResource(R.drawable.loadling);
 

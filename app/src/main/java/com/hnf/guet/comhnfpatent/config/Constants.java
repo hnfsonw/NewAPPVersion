@@ -13,7 +13,7 @@ import com.hnf.guet.comhnfpatent.util.LogUtils;
 public class Constants {
 
     //服务器请求地址
-    public static final String HOST = "https://10.21.144.181:8443/guet.patent/api/";
+    public static final String HOST = "https://10.34.13.160:8443/guet.patent/api/";
 
     //注册
     public static final String REGISTER = "acountRegister";
@@ -71,6 +71,8 @@ public class Constants {
 
     //根据关键词查询专家
     public static final String QUERY_FROFESS_BY_KEY_WORDS = "queryProfessByKeyWords";
+
+    public static final String UPLOAD_HEADER_IMAGE = "updateHeadImage";
 
     public static final int DEBUGLEVEL = LogUtils.LEVEL_ALL;
     public static final int StateSuccess = 0;//成功

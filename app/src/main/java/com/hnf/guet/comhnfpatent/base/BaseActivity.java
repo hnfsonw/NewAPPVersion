@@ -326,6 +326,18 @@ public abstract class BaseActivity extends AppCompatActivity implements NetEvent
         }
     }
 
+    public void toSDStore() {
+        int checkSad= ContextCompat.checkSelfPermission(this, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS);
+        //拒绝
+        if (checkSad == PackageManager.PERMISSION_DENIED){
+            //申请权限
+            ActivityCompat.requestPermissions(this,
+                    new String []{Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS},104);
+        }else if (checkSad == PackageManager.PERMISSION_GRANTED){
+            LogUtils.e(TAG,"已经开启存储权限");
+        }
+    }
+
 
     /**
      * 申请权限返回值
@@ -374,6 +386,15 @@ public abstract class BaseActivity extends AppCompatActivity implements NetEvent
                         LogUtils.e(TAG,"存储权限设置完毕");
                     }else {
                         LogUtils.e(TAG,"存储权限被拒绝");
+                        grantedError();
+                    }
+                    break;
+
+                case 104:
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                        LogUtils.e(TAG,"sd存储设置完毕");
+                    }else {
+                        LogUtils.e(TAG,"sd存储权限被拒绝");
                         grantedError();
                     }
                     break;

@@ -2,6 +2,7 @@ package com.hnf.guet.comhnfpatent.http;
 
 import com.hnf.guet.comhnfpatent.config.Constants;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
+import com.hnf.guet.comhnfpatent.myWedget.chatrow.Constant;
 
 import java.util.HashMap;
 import java.util.List;
@@ -157,4 +158,8 @@ public interface HttpService {
     @FormUrlEncoded
     @POST(Constants.QUERY_FROFESS_BY_KEY_WORDS)
     Call<ResponeModelInfo> queryProfessByKeywords(@FieldMap HashMap<String, Object> fields);
+
+    @Multipart
+    @POST(Constants.UPLOAD_HEADER_IMAGE)
+    Call<ResponeModelInfo> uploadheadImage(@Part List<MultipartBody.Part> partList);
 }
