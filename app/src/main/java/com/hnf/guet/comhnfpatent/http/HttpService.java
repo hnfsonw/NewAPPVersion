@@ -133,6 +133,19 @@ public interface HttpService {
     Call<ResponeModelInfo> queryCollectionOne(@FieldMap HashMap<String, Object> fields);
 
     /**
+     * 查询我的收藏所有
+     * @param fields
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.MY_ALL_COLLECTIONS)
+    Call<ResponeModelInfo> queryMyAllCollections(@FieldMap HashMap<String, Object> fields);
+
+    @FormUrlEncoded
+    @POST(Constants.MY_ALL_PUSH)
+    Call<ResponeModelInfo> queryMyAllIdea(@FieldMap HashMap<String, Object> fields);
+
+    /**
      * 验证token是否有效
      * @param fields
      */

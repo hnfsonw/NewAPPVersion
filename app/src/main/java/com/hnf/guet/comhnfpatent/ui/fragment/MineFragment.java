@@ -37,6 +37,8 @@ import com.hnf.guet.comhnfpatent.ui.activity.AboutMeActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.FeedbackActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.HomeActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.ModifyPasswordActivity;
+import com.hnf.guet.comhnfpatent.ui.activity.MyCollectionsActivity;
+import com.hnf.guet.comhnfpatent.ui.activity.MyPushActivity;
 import com.hnf.guet.comhnfpatent.ui.view.RemoveDialog;
 import com.hnf.guet.comhnfpatent.ui.view.VesionDialog;
 import com.hnf.guet.comhnfpatent.util.ImageUtils;
@@ -151,13 +153,18 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.head_img:
+                toCanmeraPermissions();
                 pickPictureDialog();
                 LogUtils.e(TAG, "头像呗点击了");
                 break;
             case R.id.my_push_layout:
+                Intent toMyIdea = new Intent(getActivity(), MyPushActivity.class);
+                startActivity(toMyIdea);
                 LogUtils.e(TAG, "发布");
                 break;
             case R.id.my_star_layout:
+                Intent toCollections = new Intent(getActivity(), MyCollectionsActivity.class);
+                startActivity(toCollections);
                 LogUtils.e(TAG, "收藏");
                 break;
             case R.id.my_message_layout:
@@ -172,7 +179,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
             case R.id.version_upgrade_layout:
                 presenter.checkNewVersion();
-
                 break;
             case R.id.feed_back_layout:
                 Intent feebIntent = new Intent(getActivity(),FeedbackActivity.class);
@@ -204,7 +210,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                         startActivityForResult(openAlbumIntent, CHOOSE_PICTURE);
                         break;
                     case TAKE_PICTURE: // 拍照
-                        toCanmeraPermissions();
                         takePicture();
                         break;
                 }

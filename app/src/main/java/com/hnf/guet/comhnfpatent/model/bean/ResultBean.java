@@ -20,6 +20,24 @@ public class ResultBean implements Serializable {
     private int versionCode;
     private String version;
     private List<IdeaEntity> ideaList;
+    private String ideaTitle;
+    private String ideaContent;
+
+    public String getIdeaTitle() {
+        return ideaTitle;
+    }
+
+    public void setIdeaTitle(String ideaTitle) {
+        this.ideaTitle = ideaTitle;
+    }
+
+    public String getIdeaContent() {
+        return ideaContent;
+    }
+
+    public void setIdeaContent(String ideaContent) {
+        this.ideaContent = ideaContent;
+    }
 
     public List<IdeaEntity> getIdeaList() {
         return ideaList;

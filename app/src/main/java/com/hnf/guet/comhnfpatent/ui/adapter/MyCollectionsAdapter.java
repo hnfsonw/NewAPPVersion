@@ -3,7 +3,6 @@ package com.hnf.guet.comhnfpatent.ui.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 
 import com.hnf.guet.comhnfpatent.R;
 import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
-import com.hnf.guet.comhnfpatent.ui.activity.FindProfessActivity;
+import com.hnf.guet.comhnfpatent.ui.activity.MyCollectionsActivity;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
 
 import java.io.IOException;
@@ -24,17 +23,16 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FindProfessAdapter extends BaseAdapter{
-
-    private static final String TAG = "FindProfessAdapter";
+public class MyCollectionsAdapter extends BaseAdapter{
+    private static final String TAG = "MyCollectionsAdapter";
     private Context mContext;
-    private FindProfessActivity mActivity;
+    private MyCollectionsActivity mActivity;
     private List<ResultBean> resultDatas;
 
-    public FindProfessAdapter(Context context, FindProfessActivity activity,List<ResultBean> resutList) {
-        mContext  = context;
+    public MyCollectionsAdapter(Context context, MyCollectionsActivity activity, List<ResultBean> resultList) {
+        mContext = context;
         mActivity = activity;
-        resultDatas = resutList;
+        resultDatas = resultList;
     }
 
     @Override
@@ -57,9 +55,9 @@ public class FindProfessAdapter extends BaseAdapter{
 
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
-        final FindProfessAdapter.ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         if (view == null){
-            viewHolder = new FindProfessAdapter.ViewHolder();
+            viewHolder = new ViewHolder();
             view = LayoutInflater.from(mContext).inflate(R.layout.item_for_homefragment,null);
             viewHolder.headerImg = view.findViewById(R.id.home_header_img);
             viewHolder.nickNameTx = view.findViewById(R.id.home_nick_name_text);
@@ -69,23 +67,8 @@ public class FindProfessAdapter extends BaseAdapter{
             viewHolder.listLayout = view.findViewById(R.id.home_list_item_layout);
             view.setTag(viewHolder);
         }else {
-            viewHolder = (FindProfessAdapter.ViewHolder) view.getTag();
+            viewHolder = (ViewHolder) view.getTag();
         }
-
-//        //怎么图片的url加载图片
-//        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-//                .detectDiskReads()
-//                .detectDiskWrites()
-//                .detectNetwork()
-//                .penaltyLog()
-//                .build());
-
-//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-//                .detectLeakedSqlLiteObjects()
-//                .detectLeakedClosableObjects()
-//                .penaltyLog()
-//                .penaltyDeath()
-//                .build());
         viewHolder.headerImg.setTag(resultDatas.get(position).getImgUrl());
         viewHolder.headerImg.setImageResource(R.drawable.loadling);
 
@@ -126,6 +109,7 @@ public class FindProfessAdapter extends BaseAdapter{
         });
         return view;
     }
+
 
     /**
      * 根据url地址加载网络头像

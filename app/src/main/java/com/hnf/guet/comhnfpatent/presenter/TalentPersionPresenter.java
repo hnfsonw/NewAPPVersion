@@ -28,6 +28,7 @@ public class TalentPersionPresenter extends BasePresenter{
         talentPersionActivity = activity;
         mGlobalvariable = talentPersionActivity.getSharedPreferences("globalvariable",Context.MODE_PRIVATE);
         mAcountName = mGlobalvariable.getString("acountName","");
+        LogUtils.e(TAG,"收藏者账号-----------》"+mAcountName);
     }
 
     /**
@@ -95,8 +96,8 @@ public class TalentPersionPresenter extends BasePresenter{
     public void queryCollections(String sToken, String selectedAcountName) {
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("token",sToken);
-        hashMap.put("collectible",selectedAcountName);
-        hashMap.put("collector",mAcountName);
+        hashMap.put("collectibleAcount",selectedAcountName);
+        hashMap.put("collectorAcount",mAcountName);
         resultData = mHttpService.queryCollectionOne(hashMap);
         talentPersionActivity.showLoading("^6^");
         resultData.enqueue(mCallback3);
