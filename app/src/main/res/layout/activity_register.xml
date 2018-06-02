@@ -253,12 +253,15 @@
                     android:paddingLeft="32dp"
                     android:paddingRight="32dp">
 
-                    <ImageView
+                    <CheckBox
+                        android:layout_marginTop="12dp"
+                        android:id="@+id/checkBox_register"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="注册成为专业用户"
+                        android:padding="10dp"
+                        />
 
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/underline_register" />
 
                 </LinearLayout>
 

@@ -121,7 +121,8 @@
         <activity android:name=".ui.activity.FindProfessActivity" />
         <activity android:name=".ui.activity.AboutMeActivity" />
         <activity android:name=".ui.activity.MyCollectionsActivity" />
-        <activity android:name=".ui.activity.MyPushActivity"></activity>
+        <activity android:name=".ui.activity.MyPushActivity" />
+        <activity android:name=".ui.activity.acountActivity.SkillsChosenActivity"></activity>
     </application>
 
 </manifest>

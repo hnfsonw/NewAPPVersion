@@ -73,7 +73,7 @@ public class MyPushAdapter extends BaseAdapter{
 
     class ViewHolder{
         TextView titleText;
-        EditText contentEdtext;
+        TextView contentEdtext;
         LinearLayout layout;
     }
 }

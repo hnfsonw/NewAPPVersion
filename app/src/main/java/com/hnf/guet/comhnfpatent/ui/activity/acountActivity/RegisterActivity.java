@@ -1,6 +1,7 @@
 package com.hnf.guet.comhnfpatent.ui.activity.acountActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -8,6 +9,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,9 +55,15 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.iv_no_view)
     ImageView mIvNoView;
 
+
+    @BindView(R.id.checkBox_register)
+    CheckBox checkBox;
+
     private RegistetrPresenter mRegisterPresenter;
     private String mPhone;
     private String mPassword;
+    private boolean checkBoxIsSelect = false;
+
 
     @Override
     protected int getLayoutRes() {
@@ -74,7 +82,7 @@ public class RegisterActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.btn_register,R.id.tv_send_code,R.id.iv_back,R.id.iv_no_view})
+    @OnClick({R.id.btn_register,R.id.tv_send_code,R.id.iv_back,R.id.iv_no_view,R.id.checkBox_register})
     public void onViewClicked(View view){
         mPhone = mEtPhone.getText().toString().trim();
         String code = mEtCode.getText().toString().trim();
@@ -83,7 +91,12 @@ public class RegisterActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.btn_register:
                 //presneter发起注册请求
-                mRegisterPresenter.registerNumber(mPhone,code,mPassword,confirmPassword);
+                if (checkBoxIsSelect){//注册成为专业用户,跳转到技能填写界面
+                    mRegisterPresenter.registerToBeProfess(mPhone,code,mPassword,confirmPassword);
+                }else {
+                    //注册成为普通用户
+                    mRegisterPresenter.registerNumber(mPhone,code,mPassword,confirmPassword);
+                }
                 break;
             case R.id.tv_send_code:
                 //发送短信验证码
@@ -95,6 +108,13 @@ public class RegisterActivity extends BaseActivity {
             case R.id.iv_no_view:
                 viewPassword();
                 break;
+            case R.id.checkBox_register:
+                if (checkBox.isChecked()){
+                    checkBoxIsSelect = true;
+                }else {
+                    checkBoxIsSelect = false;
+                }
+
         }
     }
 
@@ -189,5 +209,17 @@ public class RegisterActivity extends BaseActivity {
     public void onError(String resultMsg) {
         printn(resultMsg);
         dismissLoading();
+    }
+
+    /**
+     * 注册成为专业用户后走这个方法
+     */
+    public void registerProfessSucceed() {
+        dismissLoading();
+        Intent registerToProfess = new Intent(RegisterActivity.this,SkillsChosenActivity.class);
+                    registerToProfess.putExtra("mPhone",mPhone);
+                    registerToProfess.putExtra("mPassword",mPassword);
+                    startActivity(registerToProfess);
+                    finishActivityByAnimation(this);
     }
 }

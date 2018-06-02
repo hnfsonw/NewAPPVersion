@@ -1,6 +1,7 @@
 package com.hnf.guet.comhnfpatent.presenter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -32,11 +33,15 @@ public class RegistetrPresenter extends BasePresenter{
     private static final int TIME_MINUS = -1;
     private static final int TIME_IS_OUT = 0;
     private boolean flag = true;
+    private SharedPreferences mGlobalvariable;
+    private String globalAcountName;
+
 
     public RegistetrPresenter(Context context, RegisterActivity registerActivity) {
         super(context);
         mContext = context;
         mRegisterActivity = registerActivity;
+        mGlobalvariable = mRegisterActivity.getSharedPreferences("globalvariable",Context.MODE_PRIVATE);
     }
 
     /**
@@ -117,6 +122,7 @@ public class RegistetrPresenter extends BasePresenter{
         paramsMap.put("mobile", userName);
         paramsMap.put("password", md5PassWord);
         paramsMap.put("code", code);
+        paramsMap.put("acountType","1");
         Log.i(TAG, "注册请求网络: "+String.valueOf(paramsMap) );
         Log.d(TAG, "md5密码 toRegister: " + md5PassWord);
         mRegister = mHttpService.registerInterface(paramsMap);
@@ -154,7 +160,16 @@ public class RegistetrPresenter extends BasePresenter{
     protected void onSuccess(ResponeModelInfo body) {
         ResultBean resultBean = body.getResult();
         LogUtils.d(TAG,"注册成功"+body.getResultMsg());
-        mRegisterActivity.succeed();
+        if (body.getResult().getAcountType() == 1){
+            mRegisterActivity.succeed();
+        }else {
+            mGlobalvariable.edit()
+                    .putString("acountType","2")
+                    .putString("acountName",globalAcountName)
+                    .apply();
+            mRegisterActivity.registerProfessSucceed();
+        }
+
     }
 
     @Override
@@ -205,4 +220,54 @@ public class RegistetrPresenter extends BasePresenter{
         }
     };
 
+
+    /**
+     * 注册成为一个专业用户
+     * @param mPhone
+     * @param code
+     * @param mPassword
+     * @param confirmPassword
+     */
+    public void registerToBeProfess(String mPhone, String code, String mPassword, String confirmPassword) {
+        if (TextUtils.isEmpty(mPhone)){
+            mRegisterActivity.phoneIsEmpty();
+            return;
+        }
+
+        if (!UserUtil.checkPhone(mPhone)){
+            mRegisterActivity.phoneError();
+            return;
+        }
+
+        if (TextUtils.isEmpty(code)){
+            mRegisterActivity.codeIsEmpty();
+            return;
+        }
+
+        if (TextUtils.isEmpty(mPassword)){
+            mRegisterActivity.passWordIsEmpty();
+            return;
+        }
+
+        if (!UserUtil.judgePassword(mPassword)){
+            mRegisterActivity.passwordInconformity();
+            return;
+        }
+
+        if (!(mPassword.equals(confirmPassword) && UserUtil.judgePassword(mPassword)) ){
+            mRegisterActivity.passwordError();
+        }else{
+            globalAcountName = mPhone;
+            String md5PassWord = MD5Utils.getInstance().getMD5String(mPassword);
+            HashMap<String,String> paramsMap = new HashMap<>();
+            paramsMap.put("mobile", mPhone);
+            paramsMap.put("password", md5PassWord);
+            paramsMap.put("code", code);
+            paramsMap.put("acountType","2");//1是普通用户，2是专业用户
+            Log.d(TAG, "md5密码 toRegister: " + mPassword);
+            mRegister = mHttpService.registerInterface(paramsMap);
+            mRegisterActivity.showLoading(mContext.getString(R.string.dialogMessage));
+            mRegister.enqueue(mCallback2);
+        }
+    }
 }

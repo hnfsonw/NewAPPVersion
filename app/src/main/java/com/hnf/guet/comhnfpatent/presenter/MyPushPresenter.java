@@ -1,17 +1,21 @@
 package com.hnf.guet.comhnfpatent.presenter;
 
 import android.content.Context;
+import android.nfc.Tag;
 
 import com.hnf.guet.comhnfpatent.base.BasePresenter;
 import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.ui.activity.MyPushActivity;
+import com.hnf.guet.comhnfpatent.util.LogUtils;
 
 import java.util.HashMap;
 
 import retrofit2.Call;
 
 public class MyPushPresenter extends BasePresenter {
+
+    private static final String TAG = "MyPushPresenter";
 
     private MyPushActivity mActivity;
     private Context mContext;
@@ -27,6 +31,7 @@ public class MyPushPresenter extends BasePresenter {
     protected void parserJson(ResponeModelInfo data) {
         mActivity.dismissLoading();
         mActivity.dataOfMyPushLists(data.getResult().getUserInfoList());
+        LogUtils.e(TAG,"我的发布------------》"+data.getResult().getUserInfoList().get(0).getIdeaTitle());
     }
 
     @Override

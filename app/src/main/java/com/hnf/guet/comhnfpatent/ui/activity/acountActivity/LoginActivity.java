@@ -58,6 +58,7 @@ public class LoginActivity extends BaseActivity {
     private String mPhone;
     private String mPassword;
     private String mToken;
+    private String acountType;
 
     @Override
     protected int getLayoutRes() {

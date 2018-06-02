@@ -68,6 +68,7 @@ public class HomeActivity extends BaseActivity {
     private HomePresenter mHomePresenter;
     private SharedPreferences mGlobalvariable;
     private String macountName;
+    private String acountType = "1";
 
     /**
      * 默认状态下的本地图片
@@ -100,6 +101,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void init() {
+
         if (mHomePresenter == null){
             mHomePresenter = new HomePresenter(this,this);
         }
@@ -108,7 +110,9 @@ public class HomeActivity extends BaseActivity {
         }
         mGlobalvariable = this.getSharedPreferences("globalvariable", Context.MODE_PRIVATE);
         macountName = mGlobalvariable.getString("acountName","");
-        LogUtils.e(TAG,"acounName的值"+macountName);
+        acountType = getIntent().getStringExtra("acountType");
+        mGlobalvariable.edit().putString("acountType",acountType);
+                LogUtils.e(TAG,"acounName的值"+macountName);
 //        EventBus.getDefault().register(this);
         initView();
         initData(false);
@@ -166,6 +170,7 @@ public class HomeActivity extends BaseActivity {
                 if (position == 0 && resultListSize >= 1){
                     HomeFragment homeFragment = (HomeFragment) fm;
                     homeFragment.setList(mResultList);
+                    LogUtils.e(TAG,"账号类型-----------------》"+acountType);
                 }
             }
 

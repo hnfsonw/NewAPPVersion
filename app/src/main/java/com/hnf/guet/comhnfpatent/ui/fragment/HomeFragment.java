@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -21,6 +22,7 @@ import com.hnf.guet.comhnfpatent.ui.activity.FindProfessActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.PushGoodIdeaActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.TalentPersionActivity;
 import com.hnf.guet.comhnfpatent.ui.adapter.HomeFragmrntAdapter;
+import com.hnf.guet.comhnfpatent.ui.adapter.HomeFragmrntBBBAdapter;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
 
 import java.io.Serializable;
@@ -36,11 +38,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private ImageView circlePatentImg,ideaImg,askProfesserImg;
     private HomeFragmentPresenter homeFragmentPresenter;
     private HomeFragmrntAdapter homeFragmrntAdapter;
+    private HomeFragmrntBBBAdapter homeBAdapter;
     private List<ResultBean> resultList;
     private ListView mListview;
     private SharedPreferences mGlobalvariable;
     private String macountName;
     private ResultBean mResultBean;
+    public String acountType;
+    private FrameLayout frameLayout;
 
     @Override
     protected View getLayoutRes(LayoutInflater inflater, @Nullable Bundle savedInstanceState) {
@@ -49,6 +54,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         ideaImg = view.findViewById(R.id.bbb_img);
         askProfesserImg = view.findViewById(R.id.ccc_img);
         mListview = view.findViewById(R.id.list_view_home_fragment);
+        frameLayout = view.findViewById(R.id.hide_layout);
         return view;
     }
 
@@ -59,6 +65,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         }
         mGlobalvariable = getActivity().getSharedPreferences("globalvariable", Context.MODE_PRIVATE);
         macountName = mGlobalvariable.getString("acountName","");
+        acountType = String.valueOf(mGlobalvariable.getInt("acountType",1000));
+        LogUtils.e(TAG,"账号呵呵type---------》"+acountType);
         initView();
         initListener();
         initData();
@@ -67,9 +75,17 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private void initData() {
         LogUtils.e(TAG,"initData");
 
-        if (homeFragmrntAdapter == null)
-            homeFragmrntAdapter = new HomeFragmrntAdapter(getActivity(),this,resultList);
-        mListview.setAdapter(homeFragmrntAdapter);
+        if (acountType.equals("1")){
+            if (homeFragmrntAdapter == null)
+                homeFragmrntAdapter = new HomeFragmrntAdapter(getActivity(),this,resultList);
+            mListview.setAdapter(homeFragmrntAdapter);
+        }else {
+            if (homeBAdapter == null){
+                homeBAdapter = new HomeFragmrntBBBAdapter(getActivity(),this,resultList);
+            }
+            mListview.setAdapter(homeBAdapter);
+        }
+
 
         if (mResultBean != null){
             getDataOfUserInfo(macountName);
@@ -93,7 +109,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
 
     private void initView() {
-
+        if (acountType.equals("2")){
+            frameLayout.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -110,10 +128,18 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public void setList(List<ResultBean> mResultLists) {
         resultList = mResultLists;
         LogUtils.e(TAG,"setList这里"+resultList.size());
-        if (homeFragmrntAdapter != null){
-            homeFragmrntAdapter.setData(resultList);
-            homeFragmrntAdapter.notifyDataSetChanged();
+        if (acountType.equals("2")){
+            if (homeBAdapter != null){
+                homeBAdapter.setData(resultList);
+                homeBAdapter.notifyDataSetChanged();
+            }
+        }else {
+            if (homeFragmrntAdapter != null){
+                homeFragmrntAdapter.setData(resultList);
+                homeFragmrntAdapter.notifyDataSetChanged();
+            }
         }
+
     }
 
 
@@ -171,5 +197,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         persionIntent.putExtra("information",resultList.get(position).getInfomation());
         persionIntent.putExtra("acountName",resultList.get(position).getAcountName());
         startActivity(persionIntent);
+    }
+
+    /**
+     * 专业用户界面listView的点击事件
+     * @param position
+     */
+    public void ItemOnClickB(int position) {
+
     }
 }

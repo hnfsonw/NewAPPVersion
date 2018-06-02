@@ -1,56 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="140dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@color/selected_bg"
     android:id="@+id/mypush_list_item_layout"
     android:orientation="vertical"
     >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/white"
+    android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="标题"
-            android:gravity="center"
-            android:background="@color/colorAccent"
-            android:padding="12dp"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:id="@+id/push_title_text"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="基于安卓的专利合作平台"
-            android:gravity="center_vertical"
-            android:textSize="14sp"
-            android:paddingLeft="12dp"/>
-    </LinearLayout>
-
-
-    <EditText
-        android:id="@+id/push_content_edtext"
-        android:layout_marginTop="4dp"
-        android:background="@null"
+    <ImageView
+        android:layout_width="6dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text=""
-        android:lines="10"
-        android:gravity="top"
-        android:maxLength="140"
-        android:textSize="14sp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-    </EditText>
+        android:background="@color/colorAccent"/>
+
+    <TextView
+        android:id="@+id/push_title_text"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="40dp"
+        android:text="基于安卓的专利合作平台"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:paddingLeft="12dp"/>
+
+</LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/white"/>
+        android:layout_height="1dp"
+        android:background="@color/selected_bg"/>
+
+    <TextView
+        android:id="@+id/push_content_edtext"
+        android:background="@color/white"
+        android:text=""
+        android:maxLines="5"
+        android:gravity="top"
+        android:textSize="14sp"
+        android:ellipsize="end"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="12dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="8dp">
+    </TextView>
 
 </LinearLayout>

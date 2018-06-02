@@ -1,11 +1,8 @@
 package com.hnf.guet.comhnfpatent.ui.adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.StrictMode;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hnf.guet.comhnfpatent.R;
-import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
 import com.hnf.guet.comhnfpatent.ui.fragment.HomeFragment;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
-import com.hnf.guet.comhnfpatent.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,20 +23,16 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeFragmrntAdapter extends BaseAdapter{
-
-    private static final String TAG = "HomeFragmrntAdapter";
+public class HomeFragmrntBBBAdapter extends BaseAdapter {
+    private static final String TAG = "HomeFragmrntBBBAdapter";
     private Context mContext;
     private HomeFragment mHomeFragment;
     private List<ResultBean> resultDatas;
 
-
-
-    public HomeFragmrntAdapter(Context context,HomeFragment homeFragment,List<ResultBean> resutList){
+    public HomeFragmrntBBBAdapter(Context context,HomeFragment homeFragment,List<ResultBean> resutList){
         mContext  = context;
         mHomeFragment = homeFragment;
         resultDatas = resutList;
-
     }
 
     @Override
@@ -67,13 +58,12 @@ public class HomeFragmrntAdapter extends BaseAdapter{
         final ViewHolder viewHolder;
         if (view == null){
             viewHolder = new ViewHolder();
-            view = LayoutInflater.from(mContext).inflate(R.layout.item_for_homefragment,null);
-            viewHolder.headerImg = view.findViewById(R.id.home_header_img);
-            viewHolder.nickNameTx = view.findViewById(R.id.home_nick_name_text);
-            viewHolder.jobText = view.findViewById(R.id.home_job_text);
-            viewHolder.workExpirenceText = view.findViewById(R.id.home_job_exprience_text);
-            viewHolder.goodAtText = view.findViewById(R.id.home_good_at_text);
-            viewHolder.listLayout = view.findViewById(R.id.home_list_item_layout);
+            view = LayoutInflater.from(mContext).inflate(R.layout.item_for_homefragment_b,null);
+            viewHolder.headerImg = view.findViewById(R.id.home_header_img_homefragment_b);
+            viewHolder.titleTx = view.findViewById(R.id.home_nick_name_text_b);
+            viewHolder.pusher = view.findViewById(R.id.home_job_text_b);
+            viewHolder.pushContent = view.findViewById(R.id.push_content_edtext_of_homefragment);
+            viewHolder.listLayout = view.findViewById(R.id.home_list_item_layout_b);
             view.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) view.getTag();
@@ -106,21 +96,19 @@ public class HomeFragmrntAdapter extends BaseAdapter{
             }
         }).start();
 
-        viewHolder.nickNameTx.setText(resultDatas.get(position).getNickName());
-        viewHolder.jobText.setText(resultDatas.get(position).getJob());
-        viewHolder.workExpirenceText.setText(resultDatas.get(position).getWorkExprience());
-        viewHolder.goodAtText.setText(resultDatas.get(position).getGoodAt());
+        viewHolder.titleTx.setText(resultDatas.get(position).getIdeaTitle());
+        viewHolder.pusher.setText(resultDatas.get(position).getNickName());
+        viewHolder.pushContent.setText(resultDatas.get(position).getIdeaContent());
         LogUtils.e(TAG,"适配器位置："+position);
 
         viewHolder.listLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mHomeFragment.ItemOnClick(position);
+                mHomeFragment.ItemOnClickB(position);
             }
         });
         return view;
     }
-
 
     /**
      * 根据url地址加载网络头像
@@ -148,18 +136,15 @@ public class HomeFragmrntAdapter extends BaseAdapter{
         return null;
     }
 
-
-    class ViewHolder{
-        CircleImageView headerImg;
-        TextView nickNameTx;
-        TextView jobText;
-        TextView workExpirenceText;
-        TextView goodAtText;
-        LinearLayout listLayout;
-    }
-
     public void setData(List<ResultBean> responeList){
         resultDatas = responeList;
     }
 
+    class ViewHolder{
+        CircleImageView headerImg;
+        TextView titleTx;//需求的标题
+        TextView pusher;//发布者
+        TextView pushContent;//需求的内容
+        LinearLayout listLayout;
+    }
 }
