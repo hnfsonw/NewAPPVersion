@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/transparent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/header"
@@ -29,7 +30,8 @@
             android:layout_height="43dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="11dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerInside"
+            app:ease_shape_type="round"
             android:src="@drawable/ease_default_avatar" />
 
         <LinearLayout

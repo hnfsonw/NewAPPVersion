@@ -31,8 +31,6 @@ public class MessageFragment extends BaseFragment {
         getFragmentManager().beginTransaction().add(R.id.fragment_container,conversationListFragment)
                 .show(conversationListFragment)
                 .commit();
-
-
     }
 
     @Override

@@ -6,9 +6,12 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Process;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.hnf.guet.comhnfpatent.R;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
@@ -45,6 +48,8 @@ public class HxEaseuiHelper {
     private Map<String, EaseUser> mContactList;
     private Map<String, RobotUser> mRobotList;
     private DemoModel mDemoModel = null;
+    private UserDao userDao;
+    private LocalBroadcastManager broadcastManager;
 
     private String TAG="ChatActivity";
     private boolean isVideoCalling ;
@@ -56,23 +61,48 @@ public class HxEaseuiHelper {
         return sInstance;
     }
 
-
-    public void init(Context context,EMOptions options) {
+    //    public void init(Context context,EMOptions options)
+    public void init(Context context) {
         mDemoModel = new DemoModel(context);
-
+        EMOptions options = initOptions();
         if (EaseUI.getInstance().init(context, options)) {
             mAppContext = context;
-            //获取easeui实例
-            mEaseUI = EaseUI.getInstance();
-            //初始化easeui
-            mEaseUI.init(mAppContext,options);
             //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
             EMClient.getInstance().setDebugMode(false);
-
+            //获取easeui实例
+            mEaseUI = EaseUI.getInstance();
             setEaseUIProviders();
+            broadcastManager = LocalBroadcastManager.getInstance(mAppContext);
+            initDbDao();
         }
     }
 
+    private void initDbDao() {
+        userDao = new UserDao(mAppContext);
+    }
+
+    private EMOptions initOptions() {
+        EMOptions options = new EMOptions();
+//        options.setHuaweiPushAppId("100017619");
+//        options.setMipushConfig(Constants.XIAOMI_ID,Constants.XIAOMI_KEY);
+        // 设置自动登录
+        options.setAutoLogin(true);
+        // 设置是否需要发送已读回执
+        options.setRequireAck(true);
+        // 设置是否需要发送回执，
+        options.setRequireDeliveryAck(true);
+        // 设置是否需要服务器收到消息确认
+        options.setRequireAck(true);
+        // 设置是否根据服务器时间排序，默认是true
+        options.setSortMessageByServerTime(false);
+        // 收到好友申请是否自动同意，如果是自动同意就不会收到好友请求的回调，因为sdk会自动处理，默认为true
+        options.setAcceptInvitationAlways(false);
+        // 是否自动将消息附件上传到环信服务器，默认为True是使用环信服务器上传下载，如果设为 false，需要开发者自己处理附件消息的上传和下载
+        options.setAutoTransferMessageAttachments(true);
+        // 是否自动下载附件类消息的缩略图等，默认为 true 这里和上边这个参数相关联
+        options.setAutoDownloadThumbnail(true);
+        return options;
+    }
 
 
     protected void setEaseUIProviders() {
@@ -80,12 +110,8 @@ public class HxEaseuiHelper {
         mEaseUI.setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
             @Override
             public EaseUser getUser(String username) {
-                Log.e(TAG,"getUser.mUsername"+username);
+                LogUtils.e(TAG,"my username---------->"+username);
                 EaseUser userInfo = getUserInfo(username);
-                if (userInfo != null){
-                    LogUtils.e(TAG,"getUser.getNick"+userInfo.getNick());
-                    LogUtils.e(TAG,"EaseUser  "+userInfo);
-                }
                 return userInfo;
             }
         });
@@ -94,7 +120,25 @@ public class HxEaseuiHelper {
         mEaseUI.setSettingsProvider(new EaseUI.EaseSettingsProvider() {
             @Override
             public boolean isMsgNotifyAllowed(EMMessage message) {
-                return false;
+                if (message == null){
+                    return mDemoModel.getSettingMsgNotification();
+                }
+                if (!mDemoModel.getSettingMsgNotification()){
+                    return false;
+                }else {
+                    String chatUsename = null;
+                    List<String> notNotifyIds = null;
+                    if (message.getChatType() == EMMessage.ChatType.Chat){
+                        chatUsename = message.getFrom();
+                        notNotifyIds = mDemoModel.getDisabledIds();
+                    }
+
+                    if (notNotifyIds == null || !notNotifyIds.contains(chatUsename)){
+                        return true;
+                    }else {
+                        return false;
+                    }
+                }
             }
 
             @Override
@@ -110,7 +154,6 @@ public class HxEaseuiHelper {
             //设置扬声器
             @Override
             public boolean isSpeakerOpened() {
-                LogUtils.e(TAG,"MyApplication.sHeadset " + MyApplication.sHeadset);
                 return MyApplication.sHeadset;
             }
         });
@@ -181,47 +224,25 @@ public class HxEaseuiHelper {
 
     private EaseUser getUserInfo(String username){
         //获取 EaseUser实例, 这里从内存中读取
-        //如果你是从服务器中读读取到的，最好在本地进行缓存
         EaseUser user = null;
         //如果用户是本人，就设置自己的头像
-        Log.d(TAG, "如果用户是本人，getCurrentUser: " + EMClient.getInstance().getCurrentUser());
-        Log.d(TAG, "如果用户是本人，mUsername: " + username);
         if(username.equals(EMClient.getInstance().getCurrentUser())){
             user = new EaseUser(username);
-//            user.setAvatar(SharedPreferencesUtils.getParam(mAppContext, APPConfig.USER_HEAD_IMG,R.drawable.the_default));
-            Object relation = SharedPreferencesUtils.getParam(mAppContext, "relation", "");
-            Log.d(TAG, "设置自己的头像: " + relation);
-            user.setNick((String) SharedPreferencesUtils.getParam(mAppContext, "relation", ""));
+            Object relation = SharedPreferencesUtils.getParam(mAppContext, "imgUrl", "");
+            if (relation == null){
+                LogUtils.e(TAG,"头像对象为空");
+            }else {
+                LogUtils.e(TAG,"我的头像地址-------------->"+relation.toString());
+                user.setAvatar(relation.toString());
+            }
+            user.setNick((String) SharedPreferencesUtils.getParam(mAppContext, "nickName", ""));
+            return user;
+        }else {
+            user = new EaseUser(username);
+            LogUtils.e(TAG,"运行到这里---------->"+username );
+            user.setAvatar(SharedPreferencesUtils.getParam(mAppContext,username,"").toString());
             return user;
         }
-
-//        收到别人的消息，设置别人的头像
-        if (mContactList != null && mContactList.containsKey(username)){
-            user = mContactList.get(username);
-            LogUtils.e(TAG,"收到别人的消息从内存拿 " + user);
-
-        }else { //如果内存中没有，则将本地数据库中的取出到内存中
-//            Log.d(TAG, "从本地拿设置别人的头像: mUsername" + mUsername);
-//            if (mContactList != null){
-//            LogUtils.e(TAG,"mContactList.size()"+mContactList.size());
-//            LogUtils.e(TAG,"mContactList.get(\"17053334521\")"+mContactList.get("17053334521"));
-//            }
-//            mContactList = getContactList();
-//            LogUtils.d("ChatActivitya",mContactList.size()+" 数据库size");
-//            user = mContactList.get(mUsername);
-            user = new EaseUser(username);
-            LogUtils.d(TAG,username +MyApplication.sAcountId+"~~" );
-            String name = loadDataFromLocal(username + MyApplication.sAcountId+"", Constant.PROTOCOL_TIMEOUT_MONTH);
-            String imgUrl = loadDataFromLocal(username+MyApplication.sAcountId+"imgUrl",Constant.PROTOCOL_TIMEOUT_MONTH);
-
-            LogUtils.d(TAG,"name   ~~~ "+name);
-            LogUtils.d(TAG,"imgUrl !!! " + imgUrl);
-            user.setNick(name);
-            user.setAvatar(imgUrl);
-        }
-
-
-        return user;
     }
 
 

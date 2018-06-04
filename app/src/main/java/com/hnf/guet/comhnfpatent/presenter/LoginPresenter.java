@@ -13,6 +13,7 @@ import com.hnf.guet.comhnfpatent.ui.activity.acountActivity.LoginActivity;
 import com.hnf.guet.comhnfpatent.ui.fragment.HomeFragment;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
 import com.hnf.guet.comhnfpatent.util.MD5Utils;
+import com.hnf.guet.comhnfpatent.util.SharedPreferencesUtils;
 import com.hnf.guet.comhnfpatent.util.UserUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
@@ -243,6 +244,9 @@ public class LoginPresenter extends BasePresenter {
                 .putString("goodAt",data.getResult().getGoodAt())
                 .putString("infomation",data.getResult().getInfomation())
                 .apply();
+
+        SharedPreferencesUtils.setParam(mContext,"imgUrl",data.getResult().getImgUrl());
+        SharedPreferencesUtils.setParam(mContext,"nickName",data.getResult().getNickName());
 
         LogUtils.i(TAG,"麻痹------------->"+mGlobalvariable.getString("acountType",""));
 

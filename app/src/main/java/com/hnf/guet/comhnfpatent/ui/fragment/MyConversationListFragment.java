@@ -20,6 +20,9 @@ import retrofit2.http.GET;
 
 public class MyConversationListFragment extends EaseConversationListFragment {
 
+
+
+
     @Override
     protected void setUpView() {
         super.setUpView();
@@ -32,6 +35,7 @@ public class MyConversationListFragment extends EaseConversationListFragment {
                 String username = conversation.conversationId();//获取用户名
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 intent.putExtra(EaseConstant.EXTRA_USER_ID,username);
+//                intent.putExtra("username",username);
                 startActivity(intent);
             }
         });

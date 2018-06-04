@@ -55,7 +55,6 @@ public class SplashActivity extends BaseActivity {
         mGlobalVariable = getSharedPreferences("globalvariable",MODE_PRIVATE);
         mIsLogin = mGlobalVariable.getBoolean("login",false);
         LogUtils.e(TAG,"环信是否已经登录过："+mIsLogin);
-//        mSplashPresenter.verificationToken(MyApplication.sToken);
         mHandler = new Handler();
         if (EMClient.getInstance().isLoggedInBefore() && EMClient.getInstance().isConnected()){
             //加载所有会话到内存

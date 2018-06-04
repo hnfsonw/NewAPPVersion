@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
@@ -48,6 +49,7 @@ public class MyApplication extends MultiDexApplication {
     private SharedPreferences mGlobalVariablesp;
     public static boolean sInUpdata = false;
     public static boolean tokenIsWork = false;
+    public static Context applicationContext;
 
     //进程保活
     public static final int LIVE_JOB_ID = 0;
@@ -64,9 +66,11 @@ public class MyApplication extends MultiDexApplication {
 
     @Override
     public void onCreate() {
+        MultiDex.install(this);
         super.onCreate();
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         sInstance = this;
+        applicationContext = this;
         sHandler = new Handler();
         sResult = new ResultBean();
         mGlobalVariablesp = sInstance.getSharedPreferences("globalvariable", MODE_PRIVATE);
@@ -140,8 +144,9 @@ public class MyApplication extends MultiDexApplication {
         if (isInit) {
             return;
         }
-        HxEaseuiHelper.getInstance().init(sInstance,initOptions());
+//        HxEaseuiHelper.getInstance().init(sInstance,initOptions());
 //        initOptions();
+        HxEaseuiHelper.getInstance().init(applicationContext);
         // 设置初始化已经完成
         isInit = true;
     }

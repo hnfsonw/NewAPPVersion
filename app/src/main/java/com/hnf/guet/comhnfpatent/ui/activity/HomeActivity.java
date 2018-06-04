@@ -31,6 +31,7 @@ import com.hnf.guet.comhnfpatent.ui.fragment.MessageFragment;
 import com.hnf.guet.comhnfpatent.ui.view.BottomTab;
 import com.hnf.guet.comhnfpatent.ui.view.BottomTabLayout;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
+import com.hnf.guet.comhnfpatent.util.SharedPreferencesUtils;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
@@ -211,6 +212,9 @@ public class HomeActivity extends BaseActivity {
         LogUtils.e(TAG,"查询用户列表成功"+userInfoList.size());
         mResultList = userInfoList;
         resultListSize = mResultList.size();
+        for (int i = 0;i<resultListSize;i++){
+            SharedPreferencesUtils.setParam(mContext,mResultList.get(i).getNickName(),mResultList.get(i).getImgUrl());
+        }
         mQueryState = 1;
         if (isOnResume){
             mMBottomTabLayout.setCurrentTab(0);

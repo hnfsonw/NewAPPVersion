@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.hnf.guet.comhnfpatent.R;
 import com.hnf.guet.comhnfpatent.base.BaseActivity;
 import com.hnf.guet.comhnfpatent.base.BaseFragment;
@@ -45,6 +46,7 @@ import com.hnf.guet.comhnfpatent.ui.view.RemoveDialog;
 import com.hnf.guet.comhnfpatent.ui.view.VesionDialog;
 import com.hnf.guet.comhnfpatent.util.ImageUtils;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
+import com.hnf.guet.comhnfpatent.util.SharedPreferencesUtils;
 import com.hnf.guet.comhnfpatent.util.StringUtils;
 
 import java.io.File;
@@ -334,11 +336,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 Bitmap bm = BitmapFactory.decodeFile(headUrl);
                 headerImg.setImageBitmap(bm);
             }
+        }else {
+            Glide.with(getContext()).load(SharedPreferencesUtils.getParam(getContext(),"imgUrl",""))
+                    .into(headerImg);
         }
         if (mRemoveDialog == null){
             mRemoveDialog = new RemoveDialog(getContext(),(HomeActivity)getActivity());
         }
     }
+
+    private Context mContext;
 
     public void setCompleted() {
         headerImg.setImageBitmap(myBitmap);
