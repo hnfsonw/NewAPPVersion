@@ -49,4 +49,28 @@ public class HomeFragmentPresenter extends BasePresenter{
         LogUtils.e(TAG,"加载数据失败："+data.getResultMsg());
         mHomeFragment.dismissLoading();
     }
+
+    public void getIdeasInformation(String sToken, String acountName) {
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("token",sToken);
+        mResultData = mHttpService.queryAllIdeaInfomation(hashMap);
+        mHomeFragment.showLoading("正在加载数据……");
+        mResultData.enqueue(mCallback2);
+    }
+
+    @Override
+    protected void onSuccess(ResponeModelInfo body) {
+        if (body.getResult() != null){
+            LogUtils.e(TAG,"需求列表长度："+body.getResult().getUserInfoList().size());
+            mHomeFragment.onUserInfomation(body.getResult());
+        }else {
+            LogUtils.i(TAG,"result是空的");
+            mHomeFragment.noUserInformation();
+        }
+    }
+
+    @Override
+    protected void onError(ResponeModelInfo body) {
+        LogUtils.e(TAG,"--------------->"+body.getResultMsg());
+    }
 }

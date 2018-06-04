@@ -29,7 +29,6 @@ public class MyCollectionsActivity extends BaseActivity {
     @BindView(R.id.listview_my_collections)
     ListView mListview;
 
-
     @BindView(R.id.iv_back)
     LinearLayout mIvBack;
 

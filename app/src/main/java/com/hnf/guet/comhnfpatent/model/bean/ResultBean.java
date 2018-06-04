@@ -12,7 +12,7 @@ public class ResultBean implements Serializable {
     private String token;
     private long acountId;
     private boolean result;
-    private long id;
+    private long id;//需求的id
     private int type;
     private String createDate;
     private List<AcountListBean> acountList;
@@ -22,6 +22,24 @@ public class ResultBean implements Serializable {
     private List<IdeaEntity> ideaList;
     private String ideaTitle;
     private String ideaContent;
+    private String ideaImage;
+    private String ideaId;
+
+    public String getIdeaId() {
+        return ideaId;
+    }
+
+    public void setIdeaId(String ideaId) {
+        this.ideaId = ideaId;
+    }
+
+    public String getIdeaImage() {
+        return ideaImage;
+    }
+
+    public void setIdeaImage(String ideaImage) {
+        this.ideaImage = ideaImage;
+    }
 
     public String getIdeaTitle() {
         return ideaTitle;

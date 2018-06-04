@@ -39,6 +39,8 @@ import com.hnf.guet.comhnfpatent.ui.activity.HomeActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.ModifyPasswordActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.MyCollectionsActivity;
 import com.hnf.guet.comhnfpatent.ui.activity.MyPushActivity;
+import com.hnf.guet.comhnfpatent.ui.activity.ProfessSkillsActivity;
+import com.hnf.guet.comhnfpatent.ui.activity.acountActivity.SkillsChosenActivity;
 import com.hnf.guet.comhnfpatent.ui.view.RemoveDialog;
 import com.hnf.guet.comhnfpatent.ui.view.VesionDialog;
 import com.hnf.guet.comhnfpatent.util.ImageUtils;
@@ -56,6 +58,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
     private static final int CROP_SMALL_PICTURE = 2;
+    private static final int FUCK_CODE = 3;
     protected static Uri tempUri;
     private ImageView iv_personal_icon;
     //    @BindView(R.id.my_message_layout)
@@ -86,6 +89,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     Button loginOutBtn;
 
     TextView nickText;
+    private TextView mySkillText;
 
     private ResultBean mResult;
     private VesionDialog mVersionDialog;
@@ -97,6 +101,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     private SharedPreferences myshare;
     private SharedPreferences mGlobalvariable;
     private Bitmap myBitmap;
+    private String acountType;
 
 
     @Override
@@ -112,6 +117,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         starLayout = view.findViewById(R.id.my_star_layout);
         loginOutBtn = view.findViewById(R.id.login_out_btn);
         nickText = view.findViewById(R.id.nick_tv);
+        mySkillText = view.findViewById(R.id.my_skill_text);
         return view;
     }
 
@@ -120,6 +126,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     protected void init() {
         mGlobalvariable = getContext().getSharedPreferences("globalvariable",Context.MODE_PRIVATE);
         myshare = getContext().getSharedPreferences("hnf", Context.MODE_PRIVATE);
+        acountType = mGlobalvariable.getString("acountType","");
         hActivity = (HomeActivity) getActivity();
         presenter = new MinePresenter(getContext(),hActivity,this);
         initView();
@@ -158,9 +165,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 LogUtils.e(TAG, "头像呗点击了");
                 break;
             case R.id.my_push_layout:
-                Intent toMyIdea = new Intent(getActivity(), MyPushActivity.class);
-                startActivity(toMyIdea);
-                LogUtils.e(TAG, "发布");
+                if (acountType.equals("2")){
+                    Intent fuck = new Intent(getActivity(), ProfessSkillsActivity.class);
+                    startActivityForResult(fuck,FUCK_CODE);
+                }else {
+                    Intent toMyIdea = new Intent(getActivity(), MyPushActivity.class);
+                    startActivity(toMyIdea);
+                    LogUtils.e(TAG, "发布");
+                }
                 break;
             case R.id.my_star_layout:
                 Intent toCollections = new Intent(getActivity(), MyCollectionsActivity.class);
@@ -194,6 +206,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
         }
     }
+
+
 
     private void pickPictureDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -245,7 +259,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
         HomeActivity activity = new HomeActivity();
         if (resultCode == activity.RESULT_OK) { // 如果返回码是可以用的
             switch (requestCode) {
@@ -260,8 +274,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                         setImageToView(data); // 让刚才选择裁剪得到的图片显示在界面上
                     }
                     break;
+                case FUCK_CODE:
+                    nickText.setText(data.getStringExtra("newNick"));
+                    LogUtils.e(TAG,"新的昵称-----》"+data.getStringExtra("newNick"));
+                    break;
             }
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setImageToView(Intent data) {
@@ -303,6 +322,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     }
 
     private void initView() {
+        if (acountType.equals("2")){
+            mySkillText.setText("我的技能");
+        }
         nickText.setText(mGlobalvariable.getString("nickName","未设置昵称"));
         headUrl = myshare.getString("imageUrl","");
         LogUtils.e(TAG,"本地头像地址："+headUrl+"昵称："+mGlobalvariable.getString("nickName",""));

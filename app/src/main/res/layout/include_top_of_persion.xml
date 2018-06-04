@@ -26,6 +26,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/titlt_for_persion"
         android:text="人才详情"
         android:layout_toRightOf="@id/iv_back_persion"
         android:textSize="18sp"

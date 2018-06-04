@@ -68,7 +68,7 @@ public class HomeActivity extends BaseActivity {
     private HomePresenter mHomePresenter;
     private SharedPreferences mGlobalvariable;
     private String macountName;
-    private String acountType = "1";
+    private String acountType;
 
     /**
      * 默认状态下的本地图片
@@ -101,7 +101,8 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void init() {
-
+//        Intent intent = getIntent();
+//        acountType = intent.getStringExtra("acountType");
         if (mHomePresenter == null){
             mHomePresenter = new HomePresenter(this,this);
         }
@@ -110,22 +111,13 @@ public class HomeActivity extends BaseActivity {
         }
         mGlobalvariable = this.getSharedPreferences("globalvariable", Context.MODE_PRIVATE);
         macountName = mGlobalvariable.getString("acountName","");
-        acountType = getIntent().getStringExtra("acountType");
-        mGlobalvariable.edit().putString("acountType",acountType);
-                LogUtils.e(TAG,"acounName的值"+macountName);
-//        EventBus.getDefault().register(this);
+        acountType = mGlobalvariable.getString("acountType","");
+        LogUtils.e(TAG,"6666-------------》"+mGlobalvariable.getString("acountType",""));
+
+        LogUtils.e(TAG,"acounName的值"+macountName);
         initView();
         initData(false);
     }
-
-
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onExit(ExitModel exitModel){
-//        LogUtils.e(TAG,"退出");
-//        FragmentFactory.mCacheFragmentMap.clear();
-//        toActivity(LoginActivity.class,0);
-//        finishActivityByAnimation(this);
-//    }
 
 
     //重写onkeydown方法
@@ -153,7 +145,11 @@ public class HomeActivity extends BaseActivity {
 
         }
         mMBottomTabLayout.setBottomTabData(mBottomTabs);
-        mHomePresenter.queryUserInfoList(MyApplication.sToken,macountName);
+        if (acountType.equals("1")){
+            mHomePresenter.queryUserInfoList(MyApplication.sToken,macountName);
+        }else {
+            mHomePresenter.getIdeasInformation();
+        }
     }
 
 
@@ -169,8 +165,8 @@ public class HomeActivity extends BaseActivity {
 
                 if (position == 0 && resultListSize >= 1){
                     HomeFragment homeFragment = (HomeFragment) fm;
-                    homeFragment.setList(mResultList);
                     LogUtils.e(TAG,"账号类型-----------------》"+acountType);
+                    homeFragment.setList(mResultList);
                 }
             }
 

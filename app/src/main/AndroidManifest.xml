@@ -122,7 +122,9 @@
         <activity android:name=".ui.activity.AboutMeActivity" />
         <activity android:name=".ui.activity.MyCollectionsActivity" />
         <activity android:name=".ui.activity.MyPushActivity" />
-        <activity android:name=".ui.activity.acountActivity.SkillsChosenActivity"></activity>
+        <activity android:name=".ui.activity.acountActivity.SkillsChosenActivity" />
+        <activity android:name=".ui.activity.ProfessSkillsActivity" />
+        <activity android:name=".ui.activity.acountActivity.MyPushDetailActivity"></activity>
     </application>
 
 </manifest>

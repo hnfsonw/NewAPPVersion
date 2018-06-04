@@ -66,6 +66,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/my_skill_text"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:padding="2dp"

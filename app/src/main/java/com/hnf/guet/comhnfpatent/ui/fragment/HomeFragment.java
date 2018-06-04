@@ -60,21 +60,18 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void init() {
+        mGlobalvariable = getActivity().getSharedPreferences("globalvariable",Context.MODE_PRIVATE);
+        macountName = mGlobalvariable.getString("acountName","");
+        acountType = mGlobalvariable.getString("acountType","");
         if (homeFragmentPresenter == null){
             homeFragmentPresenter = new HomeFragmentPresenter(getActivity(),this);
         }
-        mGlobalvariable = getActivity().getSharedPreferences("globalvariable", Context.MODE_PRIVATE);
-        macountName = mGlobalvariable.getString("acountName","");
-        acountType = String.valueOf(mGlobalvariable.getInt("acountType",1000));
-        LogUtils.e(TAG,"账号呵呵type---------》"+acountType);
         initView();
         initListener();
         initData();
     }
 
     private void initData() {
-        LogUtils.e(TAG,"initData");
-
         if (acountType.equals("1")){
             if (homeFragmrntAdapter == null)
                 homeFragmrntAdapter = new HomeFragmrntAdapter(getActivity(),this,resultList);
@@ -95,7 +92,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private void getDataOfUserInfo(String acountName) {
         if (homeFragmentPresenter != null){
-            homeFragmentPresenter.getUserInfomation(MyApplication.sToken,acountName);
+            if (acountType.equals("1")){
+                homeFragmentPresenter.getUserInfomation(MyApplication.sToken,acountName);
+            }else {
+                homeFragmentPresenter.getIdeasInformation(MyApplication.sToken,acountName);
+            }
         }
     }
 
@@ -172,7 +173,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public void onUserInfomation(ResultBean result) {
         dismissLoading();
         mResultBean = result;
-        LogUtils.i(TAG,"职业2："+mResultBean.getUserInfoList().get(0).getJob());
     }
 
     /**
@@ -191,6 +191,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
      */
     public void ItemOnClick(int position) {
         Intent persionIntent = new Intent(getActivity(), TalentPersionActivity.class);
+        persionIntent.putExtra("acountType","1");
         persionIntent.putExtra("imgUrl",resultList.get(position).getImgUrl());
         persionIntent.putExtra("nickName",resultList.get(position).getNickName());
         persionIntent.putExtra("goodAt",resultList.get(position).getGoodAt());
@@ -204,6 +205,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
      * @param position
      */
     public void ItemOnClickB(int position) {
-
+        Intent persionIntent = new Intent(getActivity(), TalentPersionActivity.class);
+        persionIntent.putExtra("acountType","2");
+        persionIntent.putExtra("imgUrl",resultList.get(position).getImgUrl());
+        persionIntent.putExtra("nickName",resultList.get(position).getNickName());
+        persionIntent.putExtra("title",resultList.get(position).getIdeaTitle());
+        persionIntent.putExtra("content",resultList.get(position).getIdeaContent());
+        persionIntent.putExtra("acountName",resultList.get(position).getAcountName());
+        persionIntent.putExtra("ideaImage",resultList.get(position).getIdeaImage());
+        startActivity(persionIntent);
     }
 }

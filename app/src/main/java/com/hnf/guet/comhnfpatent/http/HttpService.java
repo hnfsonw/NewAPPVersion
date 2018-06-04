@@ -85,6 +85,13 @@ public interface HttpService {
     Call<ResponeModelInfo> updateUserInfoInterface(@FieldMap Map<String,String> fields);
 
     /**
+     * 根据专业用户的账号名查询技能信息
+     */
+    @FormUrlEncoded
+    @POST(Constants.QUERY_SKILL_BY_ACOUNTNAME)
+    Call<ResponeModelInfo> querySkillsByAcountname(@FieldMap Map<String,String> fields);
+
+    /**
      * 检查app版本是否为最新
      * @param fields
      */
@@ -107,6 +114,14 @@ public interface HttpService {
     @FormUrlEncoded
     @POST(Constants.GET_USER_INFOMATION)
     Call<ResponeModelInfo> getUserInfomation(@FieldMap HashMap<String, Object> fields);
+
+    /**
+     * 获取全部的需求
+     * @param fields
+     */
+    @FormUrlEncoded
+    @POST(Constants.QUERY_ALL_IDEAS)
+    Call<ResponeModelInfo> queryAllIdeaInfomation(@FieldMap HashMap<String, Object> fields);
 
     /**
      * 添加收藏
@@ -144,6 +159,16 @@ public interface HttpService {
     @FormUrlEncoded
     @POST(Constants.MY_ALL_PUSH)
     Call<ResponeModelInfo> queryMyAllIdea(@FieldMap HashMap<String, Object> fields);
+
+    /**
+     * 根据acoungID删除idea
+     * @param fields
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.DELECT_BY_ACOUNID)
+    Call<ResponeModelInfo> delectIdeaByAcountId(@FieldMap HashMap<String, Object> fields);
+
 
     /**
      * 验证token是否有效

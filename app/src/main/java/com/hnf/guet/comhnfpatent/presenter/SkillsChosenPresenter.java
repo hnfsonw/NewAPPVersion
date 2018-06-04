@@ -34,6 +34,7 @@ public class SkillsChosenPresenter extends BasePresenter {
     @Override
     protected void parserJson(ResponeModelInfo data) {
         mActivity.dismissLoading();
+        mGlobalvariable.edit().putString("acountType","2").apply();
         mActivity.updateSucceed();
 
     }

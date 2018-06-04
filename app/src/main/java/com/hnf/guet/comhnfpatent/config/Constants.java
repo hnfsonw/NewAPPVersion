@@ -13,7 +13,7 @@ import com.hnf.guet.comhnfpatent.util.LogUtils;
 public class Constants {
 
     //服务器请求地址
-    public static final String HOST = "https://10.34.6.156:8443/guet.patent/api/";
+    public static final String HOST = "https://10.21.144.160:8443/guet.patent/api/";
 
     //注册
     public static final String REGISTER = "acountRegister";
@@ -36,6 +36,9 @@ public class Constants {
     //修改账户信息
     public static final String UPDATE_USER_ACOUNT_INFO = "updateAcount";
 
+    //查询账户信息
+    public static final String QUERY_SKILL_BY_ACOUNTNAME = "querySkillByAcountname";
+
     //检查版本是否为最新版本
     public static final String CHECK_VERSION = "cheakVersion";
 
@@ -47,6 +50,9 @@ public class Constants {
 
     //获取专业用户的信息
     public static final String GET_USER_INFOMATION = "insertOrUpdateUserSkills";
+
+    //获取专业用户的信息
+    public static final String QUERY_ALL_IDEAS = "queryAllIdeas";
 
     //验证通信令牌是否有效
     public static final String TOKEN_IS_STILL_WORK = "verificationToken";
@@ -64,7 +70,10 @@ public class Constants {
     public static final String MY_ALL_COLLECTIONS = "queryCollectionsOfMine";
 
     //查询我的发布
-    public static final String MY_ALL_PUSH = "queryPUSHIdeaOfMine";
+    public static final String MY_ALL_PUSH = "queryAllIdeas";
+
+    //删除需求
+    public static final String DELECT_BY_ACOUNID = "delectIdeaByAcountId";
 
     //添加需求信息
     public static final String INSERT_NEW_IDEA = "insertNewIdeas";

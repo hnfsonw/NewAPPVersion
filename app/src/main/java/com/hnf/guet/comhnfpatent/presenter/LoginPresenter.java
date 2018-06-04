@@ -238,18 +238,18 @@ public class LoginPresenter extends BasePresenter {
                 .putString("imgUrl",data.getResult().getImgUrl())
                 .putString("phone",data.getResult().getPhone())
                 .putString("job",data.getResult().getJob())
-                .putInt("acountType",data.getResult().getAcountType())
+                .putString("acountType",String.valueOf(data.getResult().getAcountType()))
                 .putString("workExprience",data.getResult().getWorkExprience())
                 .putString("goodAt",data.getResult().getGoodAt())
                 .putString("infomation",data.getResult().getInfomation())
                 .apply();
 
+        LogUtils.i(TAG,"麻痹------------->"+mGlobalvariable.getString("acountType",""));
+
         //保存token
         MyApplication.sToken = data.getResult().getToken();
         MyApplication.sAcountId = data.getResult().getAcountId();
-
-
-mLoginActivity.loginSuccess();
+        mLoginActivity.loginSuccess();
     }
 
 

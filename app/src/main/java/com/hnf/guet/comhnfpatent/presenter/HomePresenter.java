@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.view.View;
 
 import com.hnf.guet.comhnfpatent.base.BasePresenter;
+import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.ui.activity.HomeActivity;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
@@ -63,5 +64,22 @@ public class HomePresenter extends BasePresenter {
         LogUtils.e(TAG,"更新失败");
     }
 
+
+    public void getIdeasInformation() {
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("token", MyApplication.sToken);
+        resultData = mHttpService.queryAllIdeaInfomation(hashMap);
+        homeActivity.showLoading("正在加载数据……");
+        resultData.enqueue(mCallback2);
+    }
+
+    @Override
+    protected void onSuccess(ResponeModelInfo body) {
+        if (body.getResult() != null){
+            LogUtils.e(TAG,"需求列表长度："+body.getResult().getUserInfoList().size());
+            homeActivity.queryUserInfoListSuccess(body.getResult().getUserInfoList());
+        }
+
+    }
 
 }

@@ -3,9 +3,11 @@ package com.hnf.guet.comhnfpatent.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,7 +17,9 @@ import com.hnf.guet.comhnfpatent.base.BaseActivity;
 import com.hnf.guet.comhnfpatent.model.bean.IdeaEntity;
 import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
 import com.hnf.guet.comhnfpatent.presenter.MyPushPresenter;
+import com.hnf.guet.comhnfpatent.ui.activity.acountActivity.MyPushDetailActivity;
 import com.hnf.guet.comhnfpatent.ui.adapter.MyPushAdapter;
+import com.hnf.guet.comhnfpatent.util.LogUtils;
 
 import java.util.List;
 
@@ -54,6 +58,10 @@ public class MyPushActivity extends BaseActivity {
         acountId = String.valueOf(mGlobalvariable.getLong("acountId",14003));
         initView();
         initData();
+        initListener();
+    }
+
+    private void initListener() {
     }
 
     private void initData() {
@@ -88,8 +96,21 @@ public class MyPushActivity extends BaseActivity {
 
     }
 
-    public void ItemOnClick(int position) {
-//        Intent myPushDetail = new
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getMyPushData(acountId);
+    }
+
+    public void ItemOnClick(final int position) {
+        LogUtils.e(TAG,"position---------->"+position);
+        Intent persionIntent = new Intent(MyPushActivity.this, MyPushDetailActivity.class);
+        persionIntent.putExtra("title",resultList.get(position).getIdeaTitle());
+        persionIntent.putExtra("content",resultList.get(position).getIdeaContent());
+        persionIntent.putExtra("acountName",resultList.get(position).getAcountName());
+        persionIntent.putExtra("ideaImage",resultList.get(position).getIdeaImage());
+        persionIntent.putExtra("ideaId",resultList.get(position).getIdeaId());
+        startActivity(persionIntent);
     }
 
     public void dataOfMyPushLists(List<ResultBean> ideaList) {

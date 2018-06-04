@@ -6,6 +6,12 @@
     android:background="#e2e2de"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -76,6 +82,7 @@
                         android:background="@color/colorAccent"/>
 
                     <TextView
+                        android:id="@+id/skill_labal_text"
                         android:layout_width="100dp"
                         android:layout_height="46dp"
                         android:text="技能标签"
@@ -133,6 +140,7 @@
                         android:background="@color/colorAccent"/>
 
                     <TextView
+                        android:id="@+id/skill_content_text"
                         android:layout_width="100dp"
                         android:layout_height="46dp"
                         android:text="个人简介"
@@ -161,20 +169,37 @@
                         android:padding="8dp"
                         android:maxLines="100"
                         android:ellipsize="end"
-                        android:text="桂林电子科技大学(Guilin University Of Electronic Technology)，简称“桂电”，坐落在世界著名的风景游览城市—桂林市，由工业和信息化部与广西壮族自治区人民政府共建，中西部高校基础能力建设工程重点建设高校， [1]  入选教育部“卓越工程师教育培养计划″、“国家大学生创新性实验计划”、“深化创新创业教育改革示范高校”、是国家“863计划”、“973计划” 承担高校之一，拥有国家大学科技园， [2]  具有自主招生资格。是总装备部通信装备预研项目定向发布的30所高校之一和北斗ICD授权的高校之一"
+                        android:text=""
                         android:textColor="@color/black"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         />
 
 
                 </LinearLayout>
 
-
+                <GridView
+                    android:id="@+id/grid_view_for_idea"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    >
+                </GridView>
 
             </LinearLayout>
 
+
         </LinearLayout>
     </ScrollView>
+
+        <ImageView
+            android:id="@+id/big_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </FrameLayout>
 
 
     <LinearLayout
