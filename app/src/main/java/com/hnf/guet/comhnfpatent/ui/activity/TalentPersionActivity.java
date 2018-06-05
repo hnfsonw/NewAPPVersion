@@ -2,6 +2,7 @@ package com.hnf.guet.comhnfpatent.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -91,6 +92,7 @@ public class TalentPersionActivity extends BaseActivity {
     private String[] ideaImageUrls;
     private ArrayList<String> urlLists;
     private GridAdapter gridAdapter;
+    private SharedPreferences mGlobalvariable;
 
     @Override
     protected int getLayoutRes() {
@@ -99,6 +101,7 @@ public class TalentPersionActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        mGlobalvariable = this.getSharedPreferences("globalvariable",Context.MODE_PRIVATE);
         talentPersionPresenter = new TalentPersionPresenter(this,this);
         final Intent intent = getIntent();
         LogUtils.e(TAG,"acountName:"+intent.getStringExtra("acountName"));
@@ -106,6 +109,9 @@ public class TalentPersionActivity extends BaseActivity {
         nickName = intent.getStringExtra("nickName");
         tagAcount = intent.getStringExtra("acountName");
         acountType = intent.getStringExtra("acountType");
+        if (acountType == null||acountType.equals("")){
+            acountType = mGlobalvariable.getString("acountType","");
+        }
         String url = intent.getStringExtra("ideaImage");
         if (url == null){
             gridView.setVisibility(View.GONE);

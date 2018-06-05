@@ -62,6 +62,7 @@ public class ProfessSkillsPresenter extends BasePresenter {
         paramsMap.put("skill", skill);
         paramsMap.put("experience",experience);
         paramsMap.put("information",imformation);
+        paramsMap.put("acountId",String.valueOf(mGlobalvariable.getLong("acountId",14003)));
         resultData = mHttpService.updateUserInfoInterface(paramsMap);
         mActivity.showLoading(mConetnt.getString(R.string.dialogMessage));
         resultData.enqueue(mCallback2);

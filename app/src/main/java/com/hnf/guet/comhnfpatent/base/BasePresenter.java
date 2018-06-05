@@ -203,37 +203,6 @@ public abstract class BasePresenter {
 
 
 
-    private void chekErrorCode(int errorCode) {
-        switch (errorCode){
-            case 92301:
-                //强制关机异常 10秒内重读操作关机
-                break;
-
-            case 92302:
-                //强制关机异常 设备已关机
-                break;
-
-            case 92303:
-                //强制关机异常 设备环信不在线状态
-                break;
-
-            case 92304:
-                //强制关机异常 设备未上传开启关闭状态
-                break;
-
-            case 94004:
-                //推送消息 消息ID不允许为空
-                break;
-
-            case 95001:
-                //业务并发数据同步 业务禁止并发行为
-                break;
-
-            case 0:
-                break;
-        }
-    }
-
 
     protected Callback<ResponeModelInfo> mCallback4 = new Callback<ResponeModelInfo>() {
         @Override

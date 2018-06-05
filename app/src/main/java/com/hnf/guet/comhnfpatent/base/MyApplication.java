@@ -39,6 +39,7 @@ public class MyApplication extends MultiDexApplication {
     public static MyApplication sInstance;
     public static int sListSize = 0;
     public static String sToken;
+    public static String bToken;//专业用户的token
     public static long sAcountId;
     public static String sAcountName;
     public static int sDeviceId;
@@ -76,6 +77,7 @@ public class MyApplication extends MultiDexApplication {
         mGlobalVariablesp = sInstance.getSharedPreferences("globalvariable", MODE_PRIVATE);
         sAcountId = mGlobalVariablesp.getLong("acountId", MODE_PRIVATE);
         sToken = mGlobalVariablesp.getString("token","");
+        bToken = mGlobalVariablesp.getString("bToken","");//专业用户的token
 
         //判断当前系统版本是否5.0以上,开启服务进程
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){

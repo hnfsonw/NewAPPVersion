@@ -166,7 +166,6 @@ public class HomeActivity extends BaseActivity {
 
                 if (position == 0 && resultListSize >= 1){
                     HomeFragment homeFragment = (HomeFragment) fm;
-                    LogUtils.e(TAG,"账号类型-----------------》"+acountType);
                     homeFragment.setList(mResultList);
                 }
             }

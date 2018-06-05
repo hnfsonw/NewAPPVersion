@@ -254,8 +254,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
 
     private void showDialog() {
-        mRemoveDialog.show();
-        mRemoveDialog.initTitle("确认退出吗？",false);
+if (!hActivity.isFinishing()){
+    mRemoveDialog.show();
+    mRemoveDialog.initTitle("确认退出吗？",false);
+}else {
+    LogUtils.e(TAG,"activity结束了");
+}
+
     }
 
 
@@ -341,7 +346,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                     .into(headerImg);
         }
         if (mRemoveDialog == null){
-            mRemoveDialog = new RemoveDialog(getContext(),(HomeActivity)getActivity());
+            mRemoveDialog = new RemoveDialog(getContext(),hActivity);
         }
     }
 
@@ -349,5 +354,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     public void setCompleted() {
         headerImg.setImageBitmap(myBitmap);
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mRemoveDialog != null && mRemoveDialog.isShowing()){
+            mRemoveDialog.dismiss();
+        }
+        super.onDestroy();
     }
 }

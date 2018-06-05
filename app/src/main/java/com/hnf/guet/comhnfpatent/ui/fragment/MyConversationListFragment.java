@@ -20,9 +20,6 @@ import retrofit2.http.GET;
 
 public class MyConversationListFragment extends EaseConversationListFragment {
 
-
-
-
     @Override
     protected void setUpView() {
         super.setUpView();

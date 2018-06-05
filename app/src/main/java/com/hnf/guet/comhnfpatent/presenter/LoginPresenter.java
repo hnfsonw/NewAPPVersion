@@ -245,10 +245,11 @@ public class LoginPresenter extends BasePresenter {
                 .putString("infomation",data.getResult().getInfomation())
                 .apply();
 
-        SharedPreferencesUtils.setParam(mContext,"imgUrl",data.getResult().getImgUrl());
+        if (data.getResult().getImgUrl() != null){
+            SharedPreferencesUtils.setParam(mContext,"imgUrl",data.getResult().getImgUrl());
+        }
         SharedPreferencesUtils.setParam(mContext,"nickName",data.getResult().getNickName());
 
-        LogUtils.i(TAG,"麻痹------------->"+mGlobalvariable.getString("acountType",""));
 
         //保存token
         MyApplication.sToken = data.getResult().getToken();

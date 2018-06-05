@@ -31,7 +31,6 @@ public class MyPushPresenter extends BasePresenter {
     protected void parserJson(ResponeModelInfo data) {
         mActivity.dismissLoading();
         mActivity.dataOfMyPushLists(data.getResult().getUserInfoList());
-        LogUtils.e(TAG,"我的发布------------》"+data.getResult().getUserInfoList().get(0).getIdeaId());
     }
 
     @Override

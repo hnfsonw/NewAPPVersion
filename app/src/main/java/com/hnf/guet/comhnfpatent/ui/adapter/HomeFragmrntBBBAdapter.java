@@ -99,7 +99,6 @@ public class HomeFragmrntBBBAdapter extends BaseAdapter {
         viewHolder.titleTx.setText(resultDatas.get(position).getIdeaTitle());
         viewHolder.pusher.setText(resultDatas.get(position).getNickName());
         viewHolder.pushContent.setText(resultDatas.get(position).getIdeaContent());
-        LogUtils.e(TAG,"适配器位置："+position);
 
         viewHolder.listLayout.setOnClickListener(new View.OnClickListener() {
             @Override

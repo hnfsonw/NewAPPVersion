@@ -159,14 +159,15 @@ public class RegistetrPresenter extends BasePresenter{
     @Override
     protected void onSuccess(ResponeModelInfo body) {
         ResultBean resultBean = body.getResult();
-        LogUtils.d(TAG,"注册成功"+body.getResultMsg());
+        LogUtils.e(TAG,"注册成功"+body.getResult().getAcountId());
         if (body.getResult().getAcountType() == 1){
             mRegisterActivity.succeed();
         }else {
             mGlobalvariable.edit()
                     .putString("acountType","2")
                     .putString("acountName",globalAcountName)
-                    .apply();
+                    .putLong("acountId",body.getResult().getAcountId())
+                    .commit();
             mRegisterActivity.registerProfessSucceed();
         }
 

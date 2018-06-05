@@ -192,6 +192,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public void ItemOnClick(int position) {
         Intent persionIntent = new Intent(getActivity(), TalentPersionActivity.class);
         persionIntent.putExtra("acountType","1");
+        mGlobalvariable.edit().putString("acountType","1").apply();
         persionIntent.putExtra("imgUrl",resultList.get(position).getImgUrl());
         persionIntent.putExtra("nickName",resultList.get(position).getNickName());
         persionIntent.putExtra("goodAt",resultList.get(position).getGoodAt());
@@ -207,6 +208,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public void ItemOnClickB(int position) {
         Intent persionIntent = new Intent(getActivity(), TalentPersionActivity.class);
         persionIntent.putExtra("acountType","2");
+        mGlobalvariable.edit().putString("acountType","2").apply();
         persionIntent.putExtra("imgUrl",resultList.get(position).getImgUrl());
         persionIntent.putExtra("nickName",resultList.get(position).getNickName());
         persionIntent.putExtra("title",resultList.get(position).getIdeaTitle());

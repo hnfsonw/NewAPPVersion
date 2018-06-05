@@ -99,7 +99,6 @@ public class MyCollectionsAdapter extends BaseAdapter{
         viewHolder.jobText.setText(resultDatas.get(position).getJob());
         viewHolder.workExpirenceText.setText(resultDatas.get(position).getWorkExprience());
         viewHolder.goodAtText.setText(resultDatas.get(position).getGoodAt());
-        LogUtils.e(TAG,"适配器位置："+position);
 
         viewHolder.listLayout.setOnClickListener(new View.OnClickListener() {
             @Override

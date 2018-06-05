@@ -11,7 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hnf.guet.comhnfpatent.R;
+import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.model.bean.ResultBean;
 import com.hnf.guet.comhnfpatent.ui.activity.FindProfessActivity;
 import com.hnf.guet.comhnfpatent.util.LogUtils;
@@ -72,51 +74,41 @@ public class FindProfessAdapter extends BaseAdapter{
             viewHolder = (FindProfessAdapter.ViewHolder) view.getTag();
         }
 
-//        //怎么图片的url加载图片
-//        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-//                .detectDiskReads()
-//                .detectDiskWrites()
-//                .detectNetwork()
-//                .penaltyLog()
-//                .build());
-
-//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-//                .detectLeakedSqlLiteObjects()
-//                .detectLeakedClosableObjects()
-//                .penaltyLog()
-//                .penaltyDeath()
-//                .build());
-        viewHolder.headerImg.setTag(resultDatas.get(position).getImgUrl());
+//        viewHolder.headerImg.setTag(resultDatas.get(position).getImgUrl());
         viewHolder.headerImg.setImageResource(R.drawable.loadling);
 
         if (resultDatas.get(position).getImgUrl() == null){
             viewHolder.headerImg.setImageResource(R.drawable.loadling); //如果url为空，这里显示默认的头像
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final Bitmap bitmap = getBitmap(resultDatas.get(position).getImgUrl());
-                    viewHolder.headerImg.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (viewHolder.headerImg.getTag() != null && viewHolder.headerImg.getTag().equals(resultDatas.get(position).getImgUrl())){
-                                viewHolder.headerImg.setImageBitmap(bitmap);
-                            }
-                        }
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    LogUtils.e(TAG,"bitmap转换失败"+e);
-                }
-            }
-        }).start();
+
+        Glide.with(MyApplication.applicationContext).load(resultDatas.get(position).getImgUrl())
+                .error(R.drawable.loadling)
+                .placeholder(R.drawable.loadling)
+                .into(viewHolder.headerImg);
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    final Bitmap bitmap = getBitmap(resultDatas.get(position).getImgUrl());
+//                    viewHolder.headerImg.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            if (viewHolder.headerImg.getTag() != null && viewHolder.headerImg.getTag().equals(resultDatas.get(position).getImgUrl())){
+//                                viewHolder.headerImg.setImageBitmap(bitmap);
+//                            }
+//                        }
+//                    });
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    LogUtils.e(TAG,"bitmap转换失败"+e);
+//                }
+//            }
+//        }).start();
 
         viewHolder.nickNameTx.setText(resultDatas.get(position).getNickName());
         viewHolder.jobText.setText(resultDatas.get(position).getJob());
         viewHolder.workExpirenceText.setText(resultDatas.get(position).getWorkExprience());
         viewHolder.goodAtText.setText(resultDatas.get(position).getGoodAt());
-        LogUtils.e(TAG,"适配器位置："+position);
 
         viewHolder.listLayout.setOnClickListener(new View.OnClickListener() {
             @Override

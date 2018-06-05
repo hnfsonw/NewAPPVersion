@@ -110,7 +110,6 @@ public class HxEaseuiHelper {
         mEaseUI.setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
             @Override
             public EaseUser getUser(String username) {
-                LogUtils.e(TAG,"my username---------->"+username);
                 EaseUser userInfo = getUserInfo(username);
                 return userInfo;
             }
@@ -232,14 +231,12 @@ public class HxEaseuiHelper {
             if (relation == null){
                 LogUtils.e(TAG,"头像对象为空");
             }else {
-                LogUtils.e(TAG,"我的头像地址-------------->"+relation.toString());
                 user.setAvatar(relation.toString());
             }
             user.setNick((String) SharedPreferencesUtils.getParam(mAppContext, "nickName", ""));
             return user;
         }else {
             user = new EaseUser(username);
-            LogUtils.e(TAG,"运行到这里---------->"+username );
             user.setAvatar(SharedPreferencesUtils.getParam(mAppContext,username,"").toString());
             return user;
         }

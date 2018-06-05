@@ -2,6 +2,7 @@ package com.hnf.guet.comhnfpatent.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.util.Log;
 
 import com.hnf.guet.comhnfpatent.R;
@@ -9,6 +10,7 @@ import com.hnf.guet.comhnfpatent.base.BasePresenter;
 import com.hnf.guet.comhnfpatent.base.MyApplication;
 import com.hnf.guet.comhnfpatent.model.ResponeModelInfo;
 import com.hnf.guet.comhnfpatent.ui.activity.acountActivity.SkillsChosenActivity;
+import com.hnf.guet.comhnfpatent.util.LogUtils;
 import com.hnf.guet.comhnfpatent.util.MD5Utils;
 
 import java.util.HashMap;
@@ -34,7 +36,8 @@ public class SkillsChosenPresenter extends BasePresenter {
     @Override
     protected void parserJson(ResponeModelInfo data) {
         mActivity.dismissLoading();
-        mGlobalvariable.edit().putString("acountType","2").apply();
+        mGlobalvariable.edit().putString("acountType","2")
+                .putString("bToken",data.getResult().getToken()).apply();
         mActivity.updateSucceed();
 
     }
@@ -51,13 +54,15 @@ public class SkillsChosenPresenter extends BasePresenter {
             return;
         }
         HashMap<String,String> paramsMap = new HashMap<>();
-        paramsMap.put("token", MyApplication.sToken);
+        paramsMap.put("btoken", MyApplication.bToken);
         paramsMap.put("acountName",mGlobalvariable.getString("acountName",""));
         paramsMap.put("nick", nick);
         paramsMap.put("job", job);
         paramsMap.put("skill", skill);
         paramsMap.put("experience",experience);
         paramsMap.put("information",imformation);
+        paramsMap.put("acountId",String.valueOf(mGlobalvariable.getLong("acountId",0)));
+        LogUtils.e(TAG,"acoungId------------>"+MyApplication.sAcountId);
         mRegister = mHttpService.updateUserInfoInterface(paramsMap);
         mActivity.showLoading(mContext.getString(R.string.dialogMessage));
         mRegister.enqueue(mCallback);
